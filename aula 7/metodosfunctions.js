@@ -87,4 +87,4 @@
 // console.log(lista,"lista")
 // console.log(resultSlice,"resultSlice")
 
-//result  
+//result a  
