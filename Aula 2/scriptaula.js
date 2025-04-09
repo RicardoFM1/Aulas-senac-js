@@ -70,52 +70,52 @@
 
 
 
-  let operador = prompt(`Digite uma opção,
-    1 - soma, 
-    2 - subtração, 
-    3 - multiplicação, 
-    4 - divisão`)
-if(operador != "1" && operador != "2" && operador != "3" && operador != "4"){
-    alert("Operação inválida")
-} else {
-    alert("Faça uma conta")
-}
-let primeiroNumero = parseInt(prompt(`Digite o primeiro número`))
-let segundoNumero = ""
-if(isNaN(primeiroNumero)){
-    alert("Digite um valor numérico")
-}else{
-     segundoNumero  = parseInt(prompt(`Digite o segundo número`))
-    if(isNaN(segundoNumero)){
-        alert("Digite um valor numérico")
+//   let operador = prompt(`Digite uma opção,
+//     1 - soma, 
+//     2 - subtração, 
+//     3 - multiplicação, 
+//     4 - divisão`)
+// if(operador != "1" && operador != "2" && operador != "3" && operador != "4"){
+//     alert("Operação inválida")
+// } else {
+//     alert("Faça uma conta")
+// }
+// let primeiroNumero = parseInt(prompt(`Digite o primeiro número`))
+// let segundoNumero = ""
+// if(isNaN(primeiroNumero)){
+//     alert("Digite um valor numérico")
+// }else{
+//      segundoNumero  = parseInt(prompt(`Digite o segundo número`))
+//     if(isNaN(segundoNumero)){
+//         alert("Digite um valor numérico")
         
-    }else {
-        if(!isNaN(primeiroNumero) && !isNaN(segundoNumero)){
+//     }else {
+//         if(!isNaN(primeiroNumero) && !isNaN(segundoNumero)){
    
-            soma = primeiroNumero + segundoNumero
-            sub = primeiroNumero - segundoNumero
-            mult = primeiroNumero * segundoNumero
-            div = primeiroNumero / segundoNumero
-            if(operador == "1")    
-                alert(`A soma do seu número é: ${soma}`)
-            if(operador == "2")    
-                alert(`A subtração do seu número é: ${sub}`)
-            if(operador == "3")    
-                alert(`A multiplicação do seu número é: ${mult}`)
-            if(operador == "4"){
-                if(primeiroNumero === 0 || segundoNumero ===0){
-                    alert("Digite um valor numérico")
+//             soma = primeiroNumero + segundoNumero
+//             sub = primeiroNumero - segundoNumero
+//             mult = primeiroNumero * segundoNumero
+//             div = primeiroNumero / segundoNumero
+//             if(operador == "1")    
+//                 alert(`A soma do seu número é: ${soma}`)
+//             if(operador == "2")    
+//                 alert(`A subtração do seu número é: ${sub}`)
+//             if(operador == "3")    
+//                 alert(`A multiplicação do seu número é: ${mult}`)
+//             if(operador == "4"){
+//                 if(primeiroNumero === 0 || segundoNumero ===0){
+//                     alert("Digite um valor numérico")
 
-                }else{
+//                 }else{
 
-                    alert(`a divisão do seu número é: ${div}`)    
-                }
-         }
-         }
-    }
+//                     alert(`a divisão do seu número é: ${div}`)    
+//                 }
+//          }
+//          }
+//     }
    
-}
+// }
 
 
 
-// a
+// // a
