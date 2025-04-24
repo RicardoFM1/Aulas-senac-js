@@ -64,7 +64,7 @@
 //if(nome.toLowerCase() == "anderson" && 1>0){   //<--- se não for iguais, não executa. 
    // alert("Parabens!")
  //}
-
+ 
 
 
 
