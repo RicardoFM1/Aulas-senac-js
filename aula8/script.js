@@ -17,7 +17,7 @@
 //             carrinho.push(produto)
 //             montarCarrinho(carrinho)
 //         })
-//     })
+//     }) 
 // }
 // montarProdutos()
 // function montarCarrinho(carrinho=[]){

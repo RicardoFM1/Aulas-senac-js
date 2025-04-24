@@ -16,5 +16,5 @@
 //         name:"Fritadeira sem óleo ",
 //         price:599,
 //         descricao:"Fritadeira das mais boas"
-//     }
+//     } 
 // ]   
