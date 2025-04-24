@@ -53,6 +53,6 @@ function getUser(){
         userspan.innerText = email
     }else{
         location.href = "../home"
-    }
+    } 
 }
 getUser()
