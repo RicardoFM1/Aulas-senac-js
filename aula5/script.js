@@ -123,7 +123,7 @@
 //     }else if (isNaN(contacorrente) || isNaN (numerosinvertidos)){
 //         alert("Digite um valor de 3 dígitos válidos!") 
 // }else{
-// function descobrirocodigoverificador(){
+// function descobrirocodigoverificador(){ 
 // let stringconta = String(contacorrente)
   
 // for(let i = stringconta.length -1; i >= 0; i--){

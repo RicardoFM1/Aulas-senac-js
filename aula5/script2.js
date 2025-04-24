@@ -41,7 +41,7 @@
 // name2.toLowerCase() || name2.toUpperCase()
 // parseFloat()
  // prompt()
- // alert()
+ // alert() 
 
 // let lista = []
 // lista.push("a")
