@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: fixed;
+     left: 0;
+     top: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.25);
+}
+.modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+}
+.toast {
+    padding: 12px 24px;
+    border-radius: 12px;
+    width: max-content;
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: open 3s ease;
+    /* transition: all 0.5 ease; */
+}
+.error {
+    background-color: #a72424;
+}
+.success {
+    background-color: #14723b;
+}
+.toast p {
+    color: #fff;
+    font-weight: 600;
+}
+@keyframes open {
+    0%{
+       top: 0; 
+       opacity: 0.5;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        top: 0;
+    }
+    100% {
+        top: -100px;
+      
+    }
+}
