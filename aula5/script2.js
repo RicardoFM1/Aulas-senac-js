@@ -33,7 +33,7 @@
 // }
 // // && , ||, < , > , >= , <= , !=, ==, ===
 // //!isNan()
-// // tratament de valores
+// // tratament de valores 
 // let numa = 0
 // numa.toFixed()
 // parseInt()
