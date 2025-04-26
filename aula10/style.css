@@ -78,5 +78,45 @@ fieldset{
     height: 40px;
     gap: 16px;
 }
+.toast{
+    transform: translateX(-50%);
+    padding: 12px 6px 12px 6px;
+    border-radius: 10px;
+    position: absolute;
+    width: max-content;
+    top: -100px;
+    left: 50%;
+    animation: abrirToast 3s ease 0.5s;
+}
+.toast p{
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+}
+.erro{
+    background-color: red;
+}
+.sucesso{
+    background-color: green;
+}
+@keyframes abrirToast {
+    0%{
+        top: 0px;
+        opacity: 0.3;
+    }
+    25%{
+        top: 25px
+    }
+    50%{
+        top: 25px
+    }
+    75%{
+        top: 25px
+    }
+    100%{
+        top: -100px;
+        opacity: 1;
 
+    }
+}
  
