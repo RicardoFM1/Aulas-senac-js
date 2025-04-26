@@ -13,7 +13,7 @@ function openModal(){
         document.body.insertAdjacentHTML("beforeend",`
             
             <div class="wrapper">
-        <div class="modal">
+        <div class="modal"> 
             <h2>Olá</h2>
             <p>Isso é um modal</p>
             <button class="close">Fechar</button>
@@ -56,3 +56,4 @@ function getUser(){
     } 
 }
 getUser()
+//.

@@ -23,9 +23,10 @@ function fazerLogin(){
             
                 <div class="toast error">
                     <p>Senha ou usuário inválidos</p>
-                </div>
+                </div> 
                 `) 
         }
-    })
+    }) 
 }   
 fazerLogin()
+//. 
