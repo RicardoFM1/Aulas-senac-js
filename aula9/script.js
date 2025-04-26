@@ -52,7 +52,7 @@ function getUser(){
         const userspan = document.querySelector(".user")
         userspan.innerText = email
     }else{
-        location.href = "../home"
+        location.href = "/"
     } 
 }
 getUser()
