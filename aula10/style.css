@@ -2,8 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-body{
+.LogineCadastro{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,9 +13,7 @@ body{
     height: 100vh;
     background-image: url(/imageBackground.png);
     background-size: 130%;
-    
 }
-
 h1{
     display: flex;
     justify-content: center;
@@ -24,40 +23,106 @@ h1{
 form{
     display: flex;
     flex-direction: column;
-    gap: 26px;
-    padding: 0 0 40px; 
+    gap: 23px;
+    padding: 20px 60px 40px 60px; 
     background-color: #1e448554;
     border-radius: 10px;
-    padding: 16px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 #botaocadastro{
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
+        border: none;
+        cursor: pointer;
         height: 32px;
         width: 150px;
-        margin-top: 40px;
-        margin-bottom: 10px;
+        margin-top: 6px;
         font-size: 20px;
         background-color: #4d8efed7;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-        
 }
 .botaologin{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    border: none;
+    cursor: pointer;
     height: 32px;
     width: 150px;
-    margin-top: 40px;
+    margin-top: 6px;
     font-size: 20px;
     background-color: #4d8efed7;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+.seCadastrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 16px;;
+}
+.fazerLogin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.733);
+  margin-top: 16px;;
+}
+.botaoVoltar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    height: 32px;
+    width: 150px;
+    font-size: 20px;
+    background-color: #4d8efed7;
+    pointer-events: none;   
+}
+.redirecionar{
+    text-decoration: underline;
+    color: rgb(11, 241, 11);
+    font-weight: 500;
+    margin-left: 6px;
+}
+a{
+ text-decoration: none;
+}
+.BotoesHome{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 40px;   
+}
+.botaoCadastroHome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #08a2a6;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+}
+.botaoLoginHome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    border: 1px solid white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    width: 100px;
+    cursor: pointer;
 
+}
+.Home{
+    background-color: black;
+}
 input{
     padding: 16px;
     border-radius: 10px;
@@ -65,7 +130,8 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    outline: 0;
+    border: 2px solid cornflowerblue;
 }
 fieldset{
     border: none;
@@ -75,7 +141,6 @@ fieldset{
     justify-items: center;
     margin: 0 auto;  
     width: 300px;
-    height: 40px;
     gap: 16px;
 }
 .toast{
@@ -90,7 +155,6 @@ fieldset{
 }
 .toast p{
     font-weight: bold;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
 }
 .erro{
