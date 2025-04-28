@@ -28,6 +28,7 @@ form{
     padding: 20px 60px 40px 60px; 
     background-color: #1e448554;
     border-radius: 10px;
+    backdrop-filter: blur(15px);
 }
 #botaocadastro{
         display: flex;
@@ -210,7 +211,6 @@ fieldset{
     width: 50%;
     font-size: 20px;
     color: white;
-
 }
 .h1Home{
     display: flex;
