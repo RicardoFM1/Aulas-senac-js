@@ -1,7 +1,5 @@
 const form = document.querySelector("#cadastro")
 function fazerCadastro(){
-    const usuarioCadastrado = JSON.parse(localStorage.getItem("usuario"))
-    const usuarioEmail = usuarioCadastrado.email
     form.addEventListener("submit", (eventocadastro)=>{
         eventocadastro.preventDefault()
         {
@@ -35,8 +33,7 @@ function fazerCadastro(){
                 email : email.value
             }
             setTimeout(()=>{
-                localStorage.setItem("usuario", JSON.stringify(user))
-                
+                localStorage.setItem("usuario", JSON.stringify(user))       
                 location.href = "/login"
             },3000)
             document.body.insertAdjacentHTML("beforeend", `

@@ -1,10 +1,10 @@
 function VerificarLogado(){
-const Islogged = JSON.parse(localStorage.getItem("isLogged"))
-
+    const Islogged = JSON.parse(localStorage.getItem("Islogged"));
+console.log(Islogged)
 if(!Islogged){
     document.body.insertAdjacentHTML("beforeend", `
         <div class="toast_autenticado">
-        <p>Usuário não autenticado</p>
+        <p class="Autenticado"><img src="gg--danger.svg" class="danger">Usuário não autenticado</p>
         </div>
         `)
 }

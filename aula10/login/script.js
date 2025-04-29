@@ -16,7 +16,7 @@ function Login(){
             </div>
             `)
             const Islogged = {
-                user: "Logado"
+                usuarioLogado: "logado"
             }
         setTimeout(()=>{
             localStorage.setItem("Islogged", JSON.stringify(Islogged))

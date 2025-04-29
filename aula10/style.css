@@ -212,6 +212,7 @@ fieldset{
     font-size: 24px;
     background-color: #08a2a6;
     border: none;
+    color: white;
 }
 .textos{
     display: flex;
@@ -286,4 +287,23 @@ li{
 .instagramP{
     width: 90%;
     margin-left: 90px;
+}
+.toast_autenticado{
+    position: fixed;
+    right: 10px;
+    bottom: 50%;
+    font-size: 24px;
+    
+   
+}
+.toast_autenticado img{
+    width: 40px;
+  
+}
+.toast_autenticado p{
+    display: flex;
+    align-items: flex-end;
+    font-size: 32px;
+    color: white;
+    background-color: red;
 }
