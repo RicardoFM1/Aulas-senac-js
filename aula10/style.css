@@ -13,7 +13,7 @@
     margin: auto;
     height: 100vh;
     background-image: url(/imageBackground.png);
-    background-size: 130%;
+    background-size: cover;
 }
 .outrasPaginas{
     display: flex;
@@ -90,7 +90,12 @@ form{
     margin-left: 6px;
 }
 a{
+text-decoration: none;
+}
+
+.linksFooter a{
  text-decoration: none;
+ width: 100%;
 }
 .BotoesHome{
     display: flex;
@@ -159,6 +164,15 @@ fieldset{
     top: -100px;
     left: 50%;
     animation: abrirToast 3s ease 0.5s;
+}
+.toastAutenticado{
+    transform: translateX(-50%);
+    padding: 12px 6px 12px 6px;
+    border-radius: 10px;
+    position: absolute;
+    width: max-content;
+    top: 10px;
+    left: 50%;
 }
 .toast p{
     font-weight: bold;
@@ -241,40 +255,26 @@ li{
     justify-content: center;
     margin: 100px;
     gap: 30px;
-    width: 100%;
+  
+}
+.linksFooter p img{
+    width: 100px;
 }
 .linksFooter .gitHub{
-    width: 50px;
-    position: absolute;
-    bottom: -25%;
-    right: 15%;
-    
+    box-sizing: border-box;
 }
 .linksFooter .linkedIn{
-    width: 50px;
-    position: absolute;
-    right: 45%;
-    bottom: -25%;
-    margin-right: 18px;
-    
+    box-sizing: border-box;
 }
 .linksFooter .instagram{
-    width: 85px;
-    position: absolute;
-    left: 31%;
-    bottom: -26%;
-    padding: 10px;
-    
-    
+    box-sizing: border-box;
 }
-.linksFooter button{
-    width: 10%;
-    background: none;
-    border: none;
-    margin-left: 1px;  
-}
+
 .linksFooter p{
-    font-size: 20px; 
+    display: flex;
+    width: 100%;
+    align-items: center; 
+    font-size: 24px;
 }
 .linkedInP{
     width: 50%;

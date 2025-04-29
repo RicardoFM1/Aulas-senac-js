@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="Home">
-    <a href="https://metodoprogramar.com.br/como-criar-uma-pagina-de-login-com-html-e-css/"><button class="saibaMais">Saiba mais</button></a>
+    <a href="https://metodoprogramar.com.br/como-criar-uma-pagina-de-login-com-html-e-css/" class="saibaMais">Saiba mais</a>
     <div class="BotoesHome">
-        <a href="/login/"><button class="botaoLoginHome">Entrar</button></a>
-        <a href="/cadastro/"><button class="botaoCadastroHome">Cadastrar-se</button></a>
+        <a href="/login/" class="botaoLoginHome">Entrar</a>
+        <a href="/cadastro/" class="botaoCadastroHome">Cadastrar-se</a>
     </div>
     <h1 class="h1Home">Quer saber como fiz esse sistema todo de login e cadastro?</h1>
 <div class="textos">
     <p>O simples objetivo desse site é de ter uma página inicial como essa, outra de login e a última para se cadastrar.
     </p>
     <p>Todas são interligadas entre si e interagem entre si, possibilitanto fazer sistemas
-    de cadastro ou login, que, exibe erros de acordocom o que está acontecendo ou toasts de sucesso
+    de cadastro ou login, que, exibe erros de acordo com o que está acontecendo ou toasts de sucesso
     caso tudo esteja certo e pronto para se cadastrar ou logar no site. 
     </p>
     <p>O legal de conseguir fazer isso tudo, que com criatividade e tempo, podemos fazer o que quiser
@@ -46,12 +46,18 @@
     </ul>
 </div>
     <footer class="linksFooter">
-        <p class="instagramP">Acesse também o meu instagram:</p>
-        <p class="linkedInP">ou o meu linkedIn:</p>
-        <p class="GitP">Caso queira aprender mais, acesse meu GitHub:</p>
-        <a href="https://github.com/RicardoFM1"><button><img class="gitHub" src="/imageGithub.png" alt="GitHub"></button></a>
-        <a href="https://www.linkedin.com/in/ricardo-fernandes-de-moura-27a656263/"><button><img class="linkedIn"src="/imageLinkedin.png" alt="LinkedIn"></button></a>
-        <a href="https://instagram.com/ricardofee_"><button><img class="instagram" src="/imageInstagram.png" alt="Instagram"></button></a>
+        <p class="instagramP">
+            Acesse também o meu instagram:
+            <a href="https://instagram.com/ricardofee_"><img class="instagram" src="/skill-icons--instagram.svg" alt="Instagram"></a>
+        </p>
+        <p class="linkedInP">ou o meu linkedIn:
+            <a href="https://www.linkedin.com/in/ricardo-fernandes-de-moura-27a656263/"><img class="linkedIn" src="/skill-icons--linkedin.svg" alt="LinkedIn">
+            </a>
+        </p>
+        <p class="GitP">Caso queira aprender mais, acesse meu GitHub:
+            <a href="https://github.com/RicardoFM1"><img class="gitHub" src="/devicon--github.svg" alt="GitHub"></a>
+        </p>
+       
     </footer>
     <script src="script.js"></script>
 </body>
@@ -59,6 +65,6 @@
 
 
 <!-- ainda falta colocar a parte do usuário logado na página home, verificar se ta logado ou não, fazer
-o script todo disso e arrumar o bug de consigar cadastrar um email já cadastrado.
+o script todo disso.
 Também ver com o sor se tem como colocar mais usuarios no localStorage e como. E ver com 
 o sor como deixar padrão as larguras, tamanhos e posições nos navegadores diferentes e telas.-->

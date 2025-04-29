@@ -12,10 +12,14 @@ function Login(){
         document.body.insertAdjacentHTML("beforeend", `
             <div class="toast sucesso">
                 <p>Login efetuado com sucesso!</p>
-                <p>Redirecionando para a página principal.</p
+                <p>Redirecionando para a página principal</p
             </div>
             `)
+            const Islogged = {
+                user: "Logado"
+            }
         setTimeout(()=>{
+            localStorage.setItem("Islogged", JSON.stringify(Islogged))
             location.href = "/"
         },3000)
         }else{

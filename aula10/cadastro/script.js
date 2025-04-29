@@ -36,6 +36,7 @@ function fazerCadastro(){
             }
             setTimeout(()=>{
                 localStorage.setItem("usuario", JSON.stringify(user))
+                
                 location.href = "/login"
             },3000)
             document.body.insertAdjacentHTML("beforeend", `
@@ -45,14 +46,6 @@ function fazerCadastro(){
                 `)
                
     }}})
-//     if(email === usuarioEmail){
-//         document.body.insertAdjacentHTML("beforeend", `
-//             <div class="toast erro">
-//                 <p>Email já cadastrado!</p>   -- ARRUMAR ERRO DE CONSEGUIR LOGAR MESMO COM UM EMAIL JÁ CADASTRADO.
-//             </div>
-//             `)
-            
-// }
     console.log(usuarioCadastrado, usuarioEmail)
 }
 
