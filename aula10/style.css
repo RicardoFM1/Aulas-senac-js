@@ -102,6 +102,7 @@ text-decoration: none;
     justify-content: end;
     align-items: end;
     gap: 40px;   
+   
 }
 .botaoCadastroHome{
     display: flex;
@@ -129,7 +130,16 @@ text-decoration: none;
     padding: 0 10px 0px 10px;
     margin: 7px;
     cursor: pointer;
+}
+.saibaMais:hover{
+    background-color: rgba(15, 232, 141, 0.304);
+}
 
+.botaoLoginHome:hover{
+    background-color: gray;
+}
+.botaoCadastroHome:hover{
+    background-color: rgba(15, 232, 141, 0.304);
 }
 .Home{
     background-image: url(/imageBackground.png);
