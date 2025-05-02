@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: gray;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-y: hidden;
+}
+.info{
+    width: 100px;
+    border: 1px solid #ed1a23;
+    background-color: #f8212b54;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+}
+.info:hover{
+    background-color: #c7696e;
+}
+#modal {
+    position: fixed;
+    bottom: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 20px;
+    background-color: #1C1C1C;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto; 
+    height: 80vh; 
+    width: 410px;
+    padding: 20px; 
+    border-radius: 8px; 
+}
+#modal::-webkit-scrollbar{
+    width: 10px;
+    background-color: #bebebe;
+}
+#modal::-webkit-scrollbar-thumb{
+    background: #ed1a23;
+    border-radius: 10px;
+}
+.nomePokeInfo {
+    background-color: yellow;
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px; 
+    margin-top: 15px;
+    
+}
+.nomePoke{
+    font-size: 20px;
+}
+.habilidadePoke, .habilidadeEfeito {
+    margin-bottom: 10px; 
+}
+#button_info {
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+}
+.buttonfechar{
+    width: 100px;
+    border: 1px solid #ed1a23;
+    background-color: #f8212b54;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+}
+.buttonfechar:hover{
+    background-color: #c7696e;
+}
+ul{
+    margin: 48px auto;
+    max-height: 630px;
+    overflow-y: auto;
+    width: 450px;
+    border-top: 40px solid #ed1a23;
+    border-bottom: 40px solid #ed1a23;
+    border-left: 20px solid #ed1a23;
+    border-right: 20px solid #ed1a23;
+    border-radius: 10px;
+}
+ul::-webkit-scrollbar {
+    width: 10px;
+    background-color: #bebebe;
+}
+ul::-webkit-scrollbar-thumb{
+    background: #ed1a23;
+    border-radius: 10px;
+}
+li{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #ffffff;
+}
+
+.homeButton{
+    position: absolute;
+    bottom: 48px;
+    left: 49%;
+    width: 38px;
+}
+.logo{
+    position: absolute;
+    top: 48px;
+    left: 48%;
+    width: 70px;
+}
+.pokebola1{
+    position: absolute;
+    top: 5%;
+    left: 34%;
+    width: 60px;
+}
+.pokebola2{
+    position: absolute;
+    bottom: 5%;
+    right: 33%;
+    width: 100px;
+}
