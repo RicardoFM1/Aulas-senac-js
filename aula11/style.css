@@ -111,6 +111,7 @@ li{
     position: absolute;
     bottom: 48px;
     left: 49%;
+    z-index: 999;
     width: 38px;
 }
 .logo{
@@ -123,11 +124,13 @@ li{
     position: absolute;
     top: 5%;
     left: 34%;
+    z-index: 999;
     width: 60px;
 }
 .pokebola2{
     position: absolute;
     bottom: 5%;
     right: 33%;
+    z-index: 999;
     width: 100px;
 }
