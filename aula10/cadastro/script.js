@@ -29,8 +29,8 @@ function fazerCadastro(){
         
         }else{
             const user  = {
-                senha: senha.value,
-                email : email.value
+                password: senha.value, // jorginho@gmail
+                email: email.value //jorginhobao
             }
             const res = await fetch("http://localhost:3001/users",{
                 method:"POST",
@@ -46,16 +46,15 @@ function fazerCadastro(){
                         <p>Usuário cadastrado com sucesso!</p>
                     </div>
                     `)
+                    setTimeout(()=>{   
+                        location.href = "/login"
+                    },3000)
             }
-            const response = await res.json()
-
-            setTimeout(()=>{   
-                location.href = "/login"
-            },3000)
             
-               
-    }}})
-    console.log(usuarioCadastrado, usuarioEmail)
+            
+            console.log(res)
+        }}})
+           
 }
 
 fazerCadastro()
