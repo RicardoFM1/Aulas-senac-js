@@ -1,6 +1,6 @@
 const form = document.querySelector("#cadastro")
 function fazerCadastro(){
-    form.addEventListener("submit", (eventocadastro)=>{
+    form.addEventListener("submit", async(eventocadastro)=>{
         eventocadastro.preventDefault()
         {
         const senha = document.querySelector("#senha")
@@ -32,15 +32,27 @@ function fazerCadastro(){
                 senha: senha.value,
                 email : email.value
             }
-            setTimeout(()=>{
-                localStorage.setItem("usuario", JSON.stringify(user))       
+            const res = await fetch("http://localhost:3001/users",{
+                method:"POST",
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type':"application/json; charset=utf-8"
+                }
+            })
+            
+            if (res.status === 201){
+                document.body.insertAdjacentHTML("beforeend", `
+                    <div class="toast sucesso">
+                        <p>Usuário cadastrado com sucesso!</p>
+                    </div>
+                    `)
+            }
+            const response = await res.json()
+
+            setTimeout(()=>{   
                 location.href = "/login"
             },3000)
-            document.body.insertAdjacentHTML("beforeend", `
-                <div class="toast sucesso">
-                    <p>Usuário cadastrado com sucesso!</p>
-                </div>
-                `)
+            
                
     }}})
     console.log(usuarioCadastrado, usuarioEmail)
