@@ -20,7 +20,8 @@ function Login(){
             headers:  {
                 'Content-Type':"application/json; charset=utf-8"
             }
-        })})
+        })
+    
         if(res.status === 200){
             document.body.insertAdjacentHTML("beforeend", `
                 <div class="toast sucesso">
@@ -44,6 +45,7 @@ function Login(){
                 </div>
                 `)
             }
+        })
             
         }
     
