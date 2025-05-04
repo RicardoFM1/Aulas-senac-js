@@ -33,14 +33,26 @@ async function pegarPokemons() {
                 const habilidades = await fetch(dados.abilities[0].ability.url)
                 const habilidades2 = await fetch(dados.abilities[1].ability.url)
                 const Locais = await fetch(dados.location_area_encounters)
+                const Movimento1 = await fetch(dados.moves[0].move.url)
+                const Movimento2 = await fetch(dados.moves[1].move.url)
+                const Movimento3 = await fetch(dados.moves[2].move.url)
+                const Movimento4 = await fetch(dados.moves[3].move.url)
+                const Movimento5 = await fetch(dados.moves[4].move.url)
                 console.log(habilidades)
                 console.log(habilidades2)
                 console.log(Locais)
+                console.log(Movimento1)
                 const habilidadesJson = await habilidades.json()
                 const habilidades2Json = await habilidades2.json()
                 const localJson = await Locais.json()
+                const movimentosJson1 = await Movimento1.json()
+                const movimentosJson2 = await Movimento2.json()
+                const movimentosJson3 = await Movimento3.json()
+                const movimentosJson4 = await Movimento4.json()
+                const movimentosJson5 = await Movimento5.json()
                 console.log(habilidadesJson.effect_entries[0].effect)
                 console.log(habilidades2Json.effect_entries[0].effect)
+                console.log(movimentosJson1)
                 
 
                 document.body.insertAdjacentHTML("beforeend", `
@@ -58,33 +70,17 @@ async function pegarPokemons() {
                         <p><strong><em>Onde encontrar:</em></strong> ${localJson[0].location_area.name}, <strong><em>chance de encontrar:</em></strong> ${localJson[0].version_details[0].encounter_details[0].chance}%,
                         <strong><em>Nível máximo:</em></strong> ${localJson[0].version_details[0].encounter_details[0].max_level},  <strong><em>método:</em></strong> ${localJson[0].version_details[0].encounter_details[0].method.name}, 
                         <strong><em>Nível mínimo:</em></strong> ${localJson[0].version_details[0].encounter_details[0].min_level}</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
-                        <p>teste</p>
+                        <p><strong><em>Movimentos:</em></strong> ${dados.moves[0].move.name}, ${dados.moves[1].move.name}, ${dados.moves[2].move.name}, ${dados.moves[3].move.name}, ${dados.moves[4].move.name} </p>
+                        <p><strong><em>Movimento 1:</em></strong> ${movimentosJson1.accuracy}<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${movimentosJson1.effect_entries[0].effect}</p>
+                        <p><strong><em>Movimento 2:</em></strong> ${movimentosJson2.accuracy}<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${movimentosJson2.effect_entries[0].effect}</p>
+                        <p><strong><em>Movimento 3:</em></strong> ${movimentosJson3.accuracy}<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${movimentosJson3.effect_entries[0].effect}</p>
+                        <p><strong><em>Movimento 4:</em></strong> ${movimentosJson4.accuracy}<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${movimentosJson4.effect_entries[0].effect}</p>
+                        <p><strong><em>Movimento 5:</em></strong> ${movimentosJson5.accuracy}<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${movimentosJson5.effect_entries[0].effect}</p>
+                        <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${dados.moves[0].version_group_details[0].move_learn_method.name}</p>
+                        <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${dados.moves[0].version_group_details[1].move_learn_method.name}</p>
+                        <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${dados.moves[0].version_group_details[2].move_learn_method.name},</p>
+                        <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${dados.moves[0].version_group_details[3].move_learn_method.name},</p>
+                        <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${dados.moves[0].version_group_details[4].move_learn_method.name},</p>
                     </div>
                         <div id="button_info">
                             <button class="buttonfechar">Fechar</button>
