@@ -34,6 +34,8 @@ body{
     width: 410px;
     padding: 20px; 
     border-radius: 8px; 
+    margin-bottom: 5px;
+    margin-left: -2px
 }
 #modal::-webkit-scrollbar{
     width: 10px;
@@ -43,22 +45,22 @@ body{
     background: #ed1a23;
     border-radius: 10px;
 }
-.nomePokeInfo {
+.informacoesPoke h1 {
     background-color: yellow;
     color: black;
     font-size: 24px;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px; 
     margin-top: 15px;
-    
+    margin-bottom: 24px;  
 }
 .nomePoke{
     font-size: 20px;
 }
-.habilidadePoke, .habilidadeEfeito {
-    margin-bottom: 10px; 
+.informacoesPoke p{
+    margin-bottom: 24px;
 }
+
 #button_info {
     position: absolute;
     top: -15px;
