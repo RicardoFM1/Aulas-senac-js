@@ -15,9 +15,35 @@ body{
     font-family: 'Courier New', Courier, monospace;
     cursor: pointer;
 }
-.Titulo{
+.header_ul{
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+.header_ul h1{
     font-size: 24px;
     background-color: yellow;
+}
+.Titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 32px;
+}
+.navegacao{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+.navegacao button{
+    margin-top: 16px;
+    border: 1px solid black;
+    background-color: #fdb5b9;
+}
+.navegacao button:hover{
+    background-color: #c7696e;
 }
 .info:hover{
     background-color: #c7696e;
@@ -85,7 +111,7 @@ body{
 .buttonfechar:hover{
     background-color: #c7696e;
 }
-ul{
+.pokemons{
     margin: 48px auto;
     max-height: 630px;
     overflow-y: auto;
