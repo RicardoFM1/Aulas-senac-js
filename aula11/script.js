@@ -517,3 +517,19 @@ async function nextPage(){
       }
     
 nextPage()
+
+function VerificarLogado(){
+  const Islogged = JSON.parse(localStorage.getItem("Islogged"));
+console.log(Islogged)
+if(!Islogged){
+  document.body.insertAdjacentHTML("beforeend", `
+      <div class="toast_autenticado">
+      <div id="danger">
+      <img src="fluent-emoji-flat--warning.svg" class="danger">
+      </div>
+      <p class="Autenticado">Usuário não autenticado, cadastre-se para poder ter acesso aos pokémons</p>
+      </div>
+      `)
+}
+}
+VerificarLogado()
