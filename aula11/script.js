@@ -1,13 +1,10 @@
-let offset = 0
+let offset = 0;
 async function pegarPokemons() {
-  const pokemons = await fetch(
-    "https://pokeapi.co/api/v2/pokemon/",
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  );
+  const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/", {
+    headers: {
+      Accept: "application/json",
+    },
+  });
 
   const pokemonRes = await pokemons.json();
   const listaPokemon = pokemonRes.results;
@@ -27,7 +24,7 @@ async function pegarPokemons() {
             </li>
             
         `
-    )
+    );
 
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
@@ -248,41 +245,44 @@ async function pegarPokemons() {
       }
     });
   }
-const prevBtn = document.querySelector("#prev")
-   
-const btnNext = document.querySelector("#next")
-  btnNext.addEventListener("click",()=>{
-    offset = offset + 20
-    prevBtn.removeAttribute("disabled")
-    nextPage()
-})
-prevBtn.addEventListener("click",()=>{
-    offset = offset - 20
-    if(offset===0){
-        prevBtn.setAttribute("disabled",true)
+  const prevBtn = document.querySelector("#prev");
+
+  const btnNext = document.querySelector("#next");
+  btnNext.addEventListener("click", () => {
+    offset = offset + 20;
+    prevBtn.removeAttribute("disabled");
+    nextPage();
+  });
+  prevBtn.addEventListener("click", () => {
+    offset = offset - 20;
+    if (offset === 0) {
+      prevBtn.setAttribute("disabled", true);
     }
-    nextPage()
-})
-prevBtn.setAttribute("disabled",true)
+    nextPage();
+  });
+  prevBtn.setAttribute("disabled", true);
 }
-pegarPokemons()
-async function nextPage(){
-    const ul = document.querySelector("ul")
-    ul.innerHTML = ""
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}`,{
-        headers: {
-            "Content-type":"application/json; charset=utf-8"
-        }
-    })
-    const response = await res.json()
-    console.log(response,"response")
-    const listPokemon = response.results
-    for(let item of listPokemon){
-        const data = await fetch(item.url)
-        const dados = await data.json()
-        ul.insertAdjacentHTML(
-          "beforeend",
-          `
+pegarPokemons();
+async function nextPage() {
+  const ul = document.querySelector("ul");
+  ul.innerHTML = "";
+  const res = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?offset=${offset}`,
+    {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+    }
+  );
+  const response = await res.json();
+  console.log(response, "response");
+  const listPokemon = response.results;
+  for (let item of listPokemon) {
+    const data = await fetch(item.url);
+    const dados = await data.json();
+    ul.insertAdjacentHTML(
+      "beforeend",
+      `
                 <li id="${item.name}">
                     <p class="nomePoke">${item.name}</p>
                     <img src="${dados.sprites.front_shiny}">
@@ -290,61 +290,85 @@ async function nextPage(){
                 </li>
                 
             `
-        )
-        const buttonInfo = document.getElementById(item.name);
-        const button = buttonInfo.querySelector(".info");
-    
-        button.addEventListener("click", async () => {
-          if (document.querySelector("#modal")) {
-            modal.remove();
-          } else {
-            const habilidades = await fetch(dados.abilities[1] ? dados.abilities[0]?.ability.url : 'Nao há');
-            const habilidades2 = await fetch(dados.abilities[1] ? dados.abilities[1]?.ability.url : 'Nao há');
-            const Locais = await fetch(dados.location_area_encounters ? dados.location_area_encounters : 'Nao há');
-            const Movimento1 = await fetch(dados.moves[0] ? dados.moves[0]?.move.url : 'Não há');
-            const Movimento2 = await fetch(dados.moves[1] ? dados.moves[1]?.move.url : 'Não há');
-            const Movimento3 = await fetch(dados.moves[2] ? dados.moves[2]?.move.url : 'Não há');
-            const Movimento4 = await fetch(dados.moves[3] ? dados.moves[3]?.move.url : 'Não há');
-            const Movimento5 = await fetch(dados.moves[4] ? dados.moves[4]?.move.url : 'Não há');
-            console.log(habilidades);
-            console.log(habilidades2);
-            console.log(Locais);
-            console.log(Movimento1);
-            const habilidadesJson = await habilidades.json();
-            const habilidades2Json = await habilidades2.json();
-            const localJson = await Locais.json();
-            const movimentosJson1 = await Movimento1.json();
-            const movimentosJson2 = await Movimento2.json();
-            const movimentosJson3 = await Movimento3.json();
-            const movimentosJson4 = await Movimento4.json();
-            const movimentosJson5 = await Movimento5.json();
-            console.log(habilidadesJson.effect_entries[0].effect);
-            console.log(habilidades2Json.effect_entries[0].effect);
-            console.log(movimentosJson1);
-    
-            document.body.insertAdjacentHTML(
-              "beforeend",
-              `
+    );
+    const buttonInfo = document.getElementById(item.name);
+    const button = buttonInfo.querySelector(".info");
+
+    button.addEventListener("click", async () => {
+      if (document.querySelector("#modal")) {
+        modal.remove();
+      } else {
+        const habilidades = await fetch(
+          dados.abilities[1] ? dados.abilities[0]?.ability.url : "Nao há"
+        );
+        const habilidades2 = await fetch(
+          dados.abilities[1] ? dados.abilities[1]?.ability.url : "Nao há"
+        );
+        const Locais = await fetch(
+          dados.location_area_encounters
+            ? dados.location_area_encounters
+            : "Nao há"
+        );
+        const Movimento1 = await fetch(
+          dados.moves[0] ? dados.moves[0]?.move.url : "Não há"
+        );
+        const Movimento2 = await fetch(
+          dados.moves[1] ? dados.moves[1]?.move.url : "Não há"
+        );
+        const Movimento3 = await fetch(
+          dados.moves[2] ? dados.moves[2]?.move.url : "Não há"
+        );
+        const Movimento4 = await fetch(
+          dados.moves[3] ? dados.moves[3]?.move.url : "Não há"
+        );
+        const Movimento5 = await fetch(
+          dados.moves[4] ? dados.moves[4]?.move.url : "Não há"
+        );
+        console.log(habilidades);
+        console.log(habilidades2);
+        console.log(Locais);
+        console.log(Movimento1);
+        const habilidadesJson = await habilidades.json();
+        const habilidades2Json = await habilidades2.json();
+        const localJson = await Locais.json();
+        const movimentosJson1 = await Movimento1.json();
+        const movimentosJson2 = await Movimento2.json();
+        const movimentosJson3 = await Movimento3.json();
+        const movimentosJson4 = await Movimento4.json();
+        const movimentosJson5 = await Movimento5.json();
+        console.log(habilidadesJson.effect_entries[0].effect);
+        console.log(habilidades2Json.effect_entries[0].effect);
+        console.log(movimentosJson1);
+
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `
                         <div id="modal"> 
                         <div class="informacoesPoke">
                             <h1>${item.name}</h1>
                             <p>
-                            <strong><em>Habilidade:</em></strong> ${dados.abilities[0] ?
-                              dados.abilities[0]?.ability.name : 'Não há'
+                            <strong><em>Habilidade:</em></strong> ${
+                              dados.abilities[0]
+                                ? dados.abilities[0]?.ability.name
+                                : "Não há"
                             }
                             </p>
     
                             <p>
                             <strong><em>Efeito:</em></strong> 
-                            ${habilidadesJson.effect_entries[0] ? habilidadesJson.effect_entries[0].effect 
-                              : 'Não há'
+                            ${
+                              habilidadesJson.effect_entries[0]
+                                ? habilidadesJson.effect_entries[0].effect
+                                : "Não há"
                             }
                             </p>
     
                             <p>
                             <strong><em>Efeito rápido:</em></strong> 
-                            ${habilidadesJson.effect_entries[0] ?habilidadesJson.effect_entries[0].short_effect
-                              : 'Não há'
+                            ${
+                              habilidadesJson.effect_entries[0]
+                                ? habilidadesJson.effect_entries[0].short_effect
+                                : "Não há"
                             }
                             </p>
     
@@ -427,47 +451,49 @@ async function nextPage(){
                             </p>
     
                             <p><strong><em>Movimentos:</em></strong> ${
-                              dados.moves[0] ? dados.moves[0].move.name : "Não há"
+                              dados.moves[0]
+                                ? dados.moves[0].move.name
+                                : "Não há"
                             }, ${
-                dados.moves[1] ? dados.moves[1].move.name : "Não há"
-              }, ${dados.moves[2] ? dados.moves[2].move.name : "Não há"}, ${
-                dados.moves[3] ? dados.moves[3].move.name : "Não há"
-              }, ${dados.moves[4] ? dados.moves[4].move.name : "Não há"} </p>
+            dados.moves[1] ? dados.moves[1].move.name : "Não há"
+          }, ${dados.moves[2] ? dados.moves[2].move.name : "Não há"}, ${
+            dados.moves[3] ? dados.moves[3].move.name : "Não há"
+          }, ${dados.moves[4] ? dados.moves[4].move.name : "Não há"} </p>
                             <p><strong><em>Movimento 1:</em></strong> ${
                               movimentosJson1.accuracy
                             }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-                movimentosJson1.effect_entries[0]
-                  ? movimentosJson1.effect_entries[0].effect
-                  : "Não há"
-              }</p>
+            movimentosJson1.effect_entries[0]
+              ? movimentosJson1.effect_entries[0].effect
+              : "Não há"
+          }</p>
                             <p><strong><em>Movimento 2:</em></strong> ${
                               movimentosJson2.accuracy
                             }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-                movimentosJson2.effect_entries[0]
-                  ? movimentosJson2.effect_entries[0].effect
-                  : "Não há"
-              }</p>
+            movimentosJson2.effect_entries[0]
+              ? movimentosJson2.effect_entries[0].effect
+              : "Não há"
+          }</p>
                             <p><strong><em>Movimento 3:</em></strong> ${
                               movimentosJson3.accuracy
                             }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-                movimentosJson3.effect_entries[0]
-                  ? movimentosJson3.effect_entries[0].effect
-                  : "Não há"
-              }</p>
+            movimentosJson3.effect_entries[0]
+              ? movimentosJson3.effect_entries[0].effect
+              : "Não há"
+          }</p>
                             <p><strong><em>Movimento 4:</em></strong> ${
                               movimentosJson4.accuracy
                             }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-                movimentosJson4.effect_entries[0]
-                  ? movimentosJson4.effect_entries[0].effect
-                  : "Não há"
-              }</p>
+            movimentosJson4.effect_entries[0]
+              ? movimentosJson4.effect_entries[0].effect
+              : "Não há"
+          }</p>
                             <p><strong><em>Movimento 5:</em></strong> ${
                               movimentosJson5.accuracy
                             }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-                movimentosJson5.effect_entries[0]
-                  ? movimentosJson5.effect_entries[0].effect
-                  : "Não há"
-              }</p>
+            movimentosJson5.effect_entries[0]
+              ? movimentosJson5.effect_entries[0].effect
+              : "Não há"
+          }</p>
                             <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${
                               dados.moves[0]
                                 ? dados.moves[0].version_group_details[0]
@@ -504,32 +530,41 @@ async function nextPage(){
                             </div>
                         </div>
                     `
-            );
-    
-            const buttonFechar = document.querySelector(".buttonfechar");
-            buttonFechar.addEventListener("click", () => {
-              const modal = document.querySelector("#modal");
-              if (modal) modal.remove();
-            });
-          }
+        );
+
+        const buttonFechar = document.querySelector(".buttonfechar");
+        buttonFechar.addEventListener("click", () => {
+          const modal = document.querySelector("#modal");
+          if (modal) modal.remove();
         });
       }
-      }
-    
-nextPage()
+    });
+  }
+}
 
-function VerificarLogado(){
+nextPage();
+
+function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
-console.log(Islogged)
-if(!Islogged){
-  document.body.insertAdjacentHTML("beforeend", `
+  const botaoLoginHome = document.querySelector(".botaoLoginHome");
+  const botaoCadastroHome = document.querySelector(".botaoCadastroHome");
+  console.log(Islogged);
+  if (!Islogged) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
       <div class="toast_autenticado">
       <div id="danger">
       <img src="fluent-emoji-flat--warning.svg" class="danger">
       </div>
       <p class="Autenticado">Usuário não autenticado, cadastre-se para poder ter acesso aos pokémons</p>
       </div>
-      `)
+      `
+    );
+  } else {
+    botaoLoginHome.remove();
+    botaoCadastroHome.removeAttribute("href");
+    botaoCadastroHome.innerHTML = "Usuario cadastrado";
+  }
 }
-}
-VerificarLogado()
+VerificarLogado();
