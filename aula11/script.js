@@ -280,17 +280,22 @@ async function nextPage() {
   for (let item of listPokemon) {
     const data = await fetch(item.url);
     const dados = await data.json();
-    ul.insertAdjacentHTML(
-      "beforeend",
-      `
-                <li id="${item.name}">
-                    <p class="nomePoke">${item.name}</p>
-                    <img src="${dados.sprites.front_shiny}">
-                    <button class="info">Mais informações</button> 
-                </li>
-                
-            `
-    );
+    
+      ul.insertAdjacentHTML(
+        "beforeend",
+        
+        `
+  
+        <li id="${item.name}">
+        <p class="nomePoke">${item.name}</p>
+                  
+          <img src="${dados.sprites.front_shiny}">
+                      <button class="info">Mais informações</button> 
+                  </li>
+                  
+                  `
+      );
+  
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
 
