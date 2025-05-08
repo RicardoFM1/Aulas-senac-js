@@ -588,10 +588,15 @@ async function favoritar(pokemon) {
       pokemon: pokemon,
 
   }
+  const botaoFavorito = document.querySelector(".botaoFavorito")
   const favoritos = await fetch("http://localhost:3001/pokemon",{
     method: "POST",
     body: JSON.stringify(obj)
   }
   )
+  // botaoFavorito.addEventListener("click",()=>{
+  //   ul.insertAdjacentHTML("be")
+  // })
+
 }
 favoritar()
