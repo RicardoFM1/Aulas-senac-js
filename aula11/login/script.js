@@ -20,7 +20,7 @@ function Login(){
                 'Content-Type':"application/json; charset=utf-8"
             }
         })
-    
+        
         if(res.status === 200){
             document.body.insertAdjacentHTML("beforeend", `
                 <div class="toast sucesso">
@@ -28,11 +28,15 @@ function Login(){
                     <p>Redirecionando para a página principal</p
                 </div>
                 `)
+                const response = await res.json()
+
                 const Islogged = {
                     usuarioLogado: "logado"
                 }
+                const userId = response.user.id
                 setTimeout(()=>{
                 localStorage.setItem("Islogged", JSON.stringify(Islogged))
+                localStorage.setItem("userId", userId)
                 location.href = "/"
             },3000)
     }

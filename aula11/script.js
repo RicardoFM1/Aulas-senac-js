@@ -9,57 +9,63 @@ async function pegarPokemons() {
   const pokemonRes = await pokemons.json();
   const listaPokemon = pokemonRes.results;
   const ul = document.querySelector("ul");
-
+  let lista = [];
   for (const item of listaPokemon) {
-    const data = await fetch(item.url);
-    const dados = await data.json();
+    // listaPokemon.forEach((item)=>{
 
-    ul.insertAdjacentHTML(
-      "beforeend",
-      `
+    setTimeout(async () => {
+      const data = await fetch(item.url);
+      const dados = await data.json();
+
+      ul.insertAdjacentHTML(
+        "beforeend",
+        `
             <li id="${item.name}">
+            <div class="botaoFavorito">
+            <button class="Estrela">★</button>
+            </div>
                 <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.front_shiny}">
+                <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
         `
-    );
+      );
 
-    const buttonInfo = document.getElementById(item.name);
-    const button = buttonInfo.querySelector(".info");
+      const buttonInfo = document.getElementById(item.name);
+      const button = buttonInfo.querySelector(".info");
 
-    button.addEventListener("click", async () => {
-      if (document.querySelector("#modal")) {
-        modal.remove();
-      } else {
-        const habilidades = await fetch(dados.abilities[0].ability.url);
-        const habilidades2 = await fetch(dados.abilities[1].ability.url);
-        const Locais = await fetch(dados.location_area_encounters);
-        const Movimento1 = await fetch(dados.moves[0].move.url);
-        const Movimento2 = await fetch(dados.moves[1].move.url);
-        const Movimento3 = await fetch(dados.moves[2].move.url);
-        const Movimento4 = await fetch(dados.moves[3].move.url);
-        const Movimento5 = await fetch(dados.moves[4].move.url);
-        console.log(habilidades);
-        console.log(habilidades2);
-        console.log(Locais);
-        console.log(Movimento1);
-        const habilidadesJson = await habilidades.json();
-        const habilidades2Json = await habilidades2.json();
-        const localJson = await Locais.json();
-        const movimentosJson1 = await Movimento1.json();
-        const movimentosJson2 = await Movimento2.json();
-        const movimentosJson3 = await Movimento3.json();
-        const movimentosJson4 = await Movimento4.json();
-        const movimentosJson5 = await Movimento5.json();
-        console.log(habilidadesJson.effect_entries[0].effect);
-        console.log(habilidades2Json.effect_entries[0].effect);
-        console.log(movimentosJson1);
+      button.addEventListener("click", async () => {
+        if (document.querySelector("#modal")) {
+          modal.remove();
+        } else {
+          const habilidades = await fetch(dados.abilities[0].ability.url);
+          const habilidades2 = await fetch(dados.abilities[1].ability.url);
+          const Locais = await fetch(dados.location_area_encounters);
+          const Movimento1 = await fetch(dados.moves[0].move.url );
+          const Movimento2 = await fetch(dados.moves[1].move.url );
+          const Movimento3 = await fetch(dados.moves[2].move.url );
+          const Movimento4 = await fetch(dados.moves[3].move.url );
+          const Movimento5 = await fetch(dados.moves[4].move.url );
+          console.log(habilidades);
+          console.log(habilidades2);
+          console.log(Locais);
+          console.log(Movimento1);
+          const habilidadesJson = await habilidades.json();
+          const habilidades2Json = await habilidades2.json();
+          const localJson = await Locais.json();
+          const movimentosJson1 = await Movimento1.json();
+          const movimentosJson2 = await Movimento2.json();
+          const movimentosJson3 = await Movimento3.json();
+          const movimentosJson4 = await Movimento4.json();
+          const movimentosJson5 = await Movimento5.json();
+          console.log(habilidadesJson.effect_entries[0].effect);
+          console.log(habilidades2Json.effect_entries[0].effect);
+          console.log(movimentosJson1);
 
-        document.body.insertAdjacentHTML(
-          "beforeend",
-          `
+          document.body.insertAdjacentHTML(
+            "beforeend",
+            `
                     <div id="modal"> 
                     <div class="informacoesPoke">
                         <h1>${item.name}</h1>
@@ -160,72 +166,72 @@ async function pegarPokemons() {
                         <p><strong><em>Movimentos:</em></strong> ${
                           dados.moves[0] ? dados.moves[0].move.name : "Não há"
                         }, ${
-            dados.moves[1] ? dados.moves[1].move.name : "Não há"
-          }, ${dados.moves[2] ? dados.moves[2].move.name : "Não há"}, ${
-            dados.moves[3] ? dados.moves[3].move.name : "Não há"
-          }, ${dados.moves[4] ? dados.moves[4].move.name : "Não há"} </p>
+              dados.moves[1] ? dados.moves[1].move.name : "Não há"
+            }, ${dados.moves[2] ? dados.moves[2].move.name : "Não há"}, ${
+              dados.moves[3] ? dados.moves[3].move.name : "Não há"
+            }, ${dados.moves[4] ? dados.moves[4].move.name : "Não há"} </p>
                         <p><strong><em>Movimento 1:</em></strong> ${
                           movimentosJson1.accuracy
                         }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-            movimentosJson1.effect_entries[0]
-              ? movimentosJson1.effect_entries[0].effect
-              : "Não há"
-          }</p>
+              movimentosJson1.effect_entries[0]
+                ? movimentosJson1.effect_entries[0].effect
+                : "Não há"
+            }</p>
                         <p><strong><em>Movimento 2:</em></strong> ${
                           movimentosJson2.accuracy
                         }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-            movimentosJson2.effect_entries[0]
-              ? movimentosJson2.effect_entries[0].effect
-              : "Não há"
-          }</p>
+              movimentosJson2.effect_entries[0]
+                ? movimentosJson2.effect_entries[0].effect
+                : "Não há"
+            }</p>
                         <p><strong><em>Movimento 3:</em></strong> ${
                           movimentosJson3.accuracy
                         }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-            movimentosJson3.effect_entries[0]
-              ? movimentosJson3.effect_entries[0].effect
-              : "Não há"
-          }</p>
+              movimentosJson3.effect_entries[0]
+                ? movimentosJson3.effect_entries[0].effect
+                : "Não há"
+            }</p>
                         <p><strong><em>Movimento 4:</em></strong> ${
                           movimentosJson4.accuracy
                         }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-            movimentosJson4.effect_entries[0]
-              ? movimentosJson4.effect_entries[0].effect
-              : "Não há"
-          }</p>
+              movimentosJson4.effect_entries[0]
+                ? movimentosJson4.effect_entries[0].effect
+                : "Não há"
+            }</p>
                         <p><strong><em>Movimento 5:</em></strong> ${
                           movimentosJson5.accuracy
                         }<strong><em>% de precisão,</em></strong> <strong><em>efeito do movimento:</em></strong> ${
-            movimentosJson5.effect_entries[0]
-              ? movimentosJson5.effect_entries[0].effect
-              : "Não há"
-          }</p>
+              movimentosJson5.effect_entries[0]
+                ? movimentosJson5.effect_entries[0].effect
+                : "Não há"
+            }</p>
                         <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${
                           dados.moves[0]
-                            ? dados.moves[0].version_group_details[0]
+                             ?dados.moves[0].version_group_details[0]
                                 ?.move_learn_method.name
                             : "Não há"
                         }</p>
                         <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${
                           dados.moves[0]
-                            ? dados.moves[0].version_group_details[1]
+                            ?dados.moves[0].version_group_details[1]
                                 ?.move_learn_method.name
                             : "Não há"
                         }</p>
                         <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${
                           dados.moves[0]
-                            ? dados.moves[0].version_group_details[2]
+                            ?dados.moves[0].version_group_details[2]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
                         <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${
                           dados.moves[0]
-                            ? dados.moves[0].version_group_details[3]
+                            ?dados.moves[0].version_group_details[3]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
                         <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${
                           dados.moves[0]
-                            ? dados.moves[0].version_group_details[4]
+                            ?dados.moves[0].version_group_details[4]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
@@ -235,15 +241,16 @@ async function pegarPokemons() {
                         </div>
                     </div>
                 `
-        );
+          );
 
-        const buttonFechar = document.querySelector(".buttonfechar");
-        buttonFechar.addEventListener("click", () => {
-          const modal = document.querySelector("#modal");
-          if (modal) modal.remove();
-        });
-      }
-    });
+          const buttonFechar = document.querySelector(".buttonfechar");
+          buttonFechar.addEventListener("click", () => {
+            const modal = document.querySelector("#modal");
+            if (modal) modal.remove();
+          });
+        }
+      });
+    }, 1500);
   }
   const prevBtn = document.querySelector("#prev");
 
@@ -280,22 +287,23 @@ async function nextPage() {
   for (let item of listPokemon) {
     const data = await fetch(item.url);
     const dados = await data.json();
-    
-      ul.insertAdjacentHTML(
-        "beforeend",
-        
-        `
-  
-        <li id="${item.name}">
-        <p class="nomePoke">${item.name}</p>
-                  
-          <img src="${dados.sprites.front_shiny}">
-                      <button class="info">Mais informações</button> 
-                  </li>
+
+    ul.insertAdjacentHTML(
+      "beforeend",
+
+      `
+          <li id="${item.name}">
+            <div class="botaoFavorito">
+            <button class="Estrela">★</button>
+            </div>
+                <p class="nomePoke">${item.name}</p>
+                <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
+                <button class="info">Mais informações</button> 
+            </li>
                   
                   `
-      );
-  
+    );
+
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
 
@@ -499,33 +507,33 @@ async function nextPage() {
               ? movimentosJson5.effect_entries[0].effect
               : "Não há"
           }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${
+                            <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${dados.moves[0] ?
                               dados.moves[0]
-                                ? dados.moves[0].version_group_details[0]
+                                .dados.moves[0].version_group_details[0]
                                     ?.move_learn_method.name
                                 : "Não há"
                             }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${
+                            <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${dados.moves[0] ?
                               dados.moves[0]
-                                ? dados.moves[0].version_group_details[1]
+                                .dados.moves[0].version_group_details[1]
                                     ?.move_learn_method.name
                                 : "Não há"
                             }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${
+                            <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${dados.moves[0] ?
                               dados.moves[0]
-                                ? dados.moves[0].version_group_details[2]
+                                .dados.moves[0].version_group_details[2]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
-                            <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${
+                            <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${dados.moves[0] ?
                               dados.moves[0]
-                                ? dados.moves[0].version_group_details[3]
+                                .dados.moves[0].version_group_details[3]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
-                            <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${
+                            <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${dados.moves[0] ?
                               dados.moves[0]
-                                ? dados.moves[0].version_group_details[4]
+                                .dados.moves[0].version_group_details[4]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
@@ -547,7 +555,7 @@ async function nextPage() {
   }
 }
 
-nextPage();
+
 
 function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
@@ -573,3 +581,17 @@ function VerificarLogado() {
   }
 }
 VerificarLogado();
+
+async function favoritar(pokemon) {
+  const obj = {
+      userId: localStorage.getItem("userId"),
+      pokemon: pokemon,
+
+  }
+  const favoritos = await fetch("http://localhost:3001/pokemon",{
+    method: "POST",
+    body: JSON.stringify(obj)
+  }
+  )
+}
+favoritar()
