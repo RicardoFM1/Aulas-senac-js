@@ -9,7 +9,7 @@ async function pegarPokemons() {
   const pokemonRes = await pokemons.json();
   const listaPokemon = pokemonRes.results;
   const ul = document.querySelector("ul");
-  let lista = [];
+  
   for (const item of listaPokemon) {
     // listaPokemon.forEach((item)=>{
 
@@ -31,7 +31,11 @@ async function pegarPokemons() {
             
         `
       );
-
+        const botaoAdd = document.querySelector(".Estrela")
+      botaoAdd.addEventListener("click", () => {
+      console.log(item, "pokemons")   // ------ precisa iterar sobre cada um, oq já faz, porém apenas sobre o que tu clicar.
+    
+  })
       const buttonInfo = document.getElementById(item.name);
       const button = buttonInfo.querySelector(".info");
 
@@ -251,7 +255,9 @@ async function pegarPokemons() {
         }
       });
     }, 1500);
+  
   }
+  
   const prevBtn = document.querySelector("#prev");
 
   const btnNext = document.querySelector("#next");
@@ -268,8 +274,11 @@ async function pegarPokemons() {
     nextPage();
   });
   prevBtn.setAttribute("disabled", true);
+   
 }
+
 pegarPokemons();
+
 async function nextPage() {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
@@ -582,18 +591,9 @@ function VerificarLogado() {
 }
 VerificarLogado();
 
-function montarFavorito(){
-  const body = document.querySelector("body")
-  const botaoFavoritoLista = document.querySelector(".botaoFavoritoLista")
-  botaoFavoritoLista.addEventListener("click",()=>{
-    body.insertAdjacentHTML("beforeend", `
-      <ul class="ListaFavoritos">
-      <li>Teste</li>
-      </ul>
-      `)
-  })
 
-}
+  
+
 
 // async function favoritar(listaPokemon) {
 //   const obj = {
