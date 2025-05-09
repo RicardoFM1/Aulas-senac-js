@@ -582,21 +582,38 @@ function VerificarLogado() {
 }
 VerificarLogado();
 
-async function favoritar(pokemon) {
-  const obj = {
-      userId: localStorage.getItem("userId"),
-      pokemon: pokemon,
-
-  }
-  const botaoFavorito = document.querySelector(".botaoFavorito")
-  const favoritos = await fetch("http://localhost:3001/pokemon",{
-    method: "POST",
-    body: JSON.stringify(obj)
-  }
-  )
-  // botaoFavorito.addEventListener("click",()=>{
-  //   ul.insertAdjacentHTML("be")
-  // })
+function montarFavorito(){
+  const body = document.querySelector("body")
+  const botaoFavoritoLista = document.querySelector(".botaoFavoritoLista")
+  botaoFavoritoLista.addEventListener("click",()=>{
+    body.insertAdjacentHTML("beforeend", `
+      <ul class="ListaFavoritos">
+      <li>Teste</li>
+      </ul>
+      `)
+  })
 
 }
-favoritar()
+
+// async function favoritar(listaPokemon) {
+//   const obj = {
+//       userId: localStorage.getItem("userId"),
+//       pokemons: listaPokemon
+
+//   }
+//   const botaoFavorito = document.querySelector(".botaoFavorito")
+//   // const favoritos = await fetch("http://localhost:3001/pokemon",{
+//   //   method: "POST",
+//   //   body: JSON.stringify(obj)
+//   // }
+//   // )
+//   botaoFavorito.addEventListener("click",()=>{
+//     document.body.insertAdjacentHTML("beforeend",`
+//       <ul id="ListaPokemonFavoritos">
+//       <li>teste</li>
+//       </ul>
+//       `)
+//   })
+
+// }
+// favoritar()

@@ -50,7 +50,7 @@ body {
 }
 #modal {
   position: fixed;
-  bottom: 11%;
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
   gap: 20px;
@@ -416,7 +416,7 @@ li {
   justify-content: flex-end;
   align-items: center;
 }
-.listaFavoritos{
+.botaoFavoritoLista{
     color: white;
     background-color: #08a2a6;
     border: none;
