@@ -1,5 +1,5 @@
 let offset = 0;
-let favoritos = []
+let favoritos = [];
 async function pegarPokemons() {
   const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/", {
     headers: {
@@ -10,7 +10,7 @@ async function pegarPokemons() {
   const pokemonRes = await pokemons.json();
   const listaPokemon = pokemonRes.results;
   const ul = document.querySelector("ul");
-  
+
   for (const item of listaPokemon) {
     // listaPokemon.forEach((item)=>{
 
@@ -26,57 +26,55 @@ async function pegarPokemons() {
             <button id="${item.name}fav" class="Estrela">★</button>
             </div>
                 <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
+                <img src="${dados.sprites.front_default}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
         `
       );
-async function PokemonAdd(){
-  const UserId = localStorage.getItem("userId")
-  const botaoAdd = document.getElementById(`${item.name}fav`)
-  botaoAdd.addEventListener("click", async() => {
-    console.log(item.name) 
-    const Pokemon = {                     // --- quando clicar no botao de favoritar, colocar na api "pokemon" o pokemon que favoritou, 
-    // depois disso, pegar do api as informações e colocar dentro do lista que é criada quando abre o botao de favoritos
-      
-      "name": item.name,
-      "img": dados.sprites.front_shiny,
-      "userId": UserId
-    }
-     const Favoritos = await fetch("http://localhost:3001/pokemon", 
-      {
+      async function PokemonAdd() {
+        const UserId = localStorage.getItem("userId");
+        const botaoAdd = document.getElementById(`${item.name}fav`);
+        botaoAdd.addEventListener("click", async () => {
+          console.log(item.name);
+          const Pokemon = {
+            // --- quando clicar no botao de favoritar, colocar na api "pokemon" o pokemon que favoritou,
+            // depois disso, pegar do api as informações e colocar dentro do lista que é criada quando abre o botao de favoritos
+
+            name: item.name,
+            img: dados.sprites.front_default,
+            userId: UserId,
+          };
+          const Favoritos = await fetch("http://localhost:3001/pokemon", {
             body: JSON.stringify(Pokemon),
             method: "POST",
-            headers:  {
-                'Content-Type':"application/json; charset=utf-8"
-            }
-        })
-  
-console.log(Favoritos)
-      
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+          });
 
+          console.log(Favoritos);
 
-    console.log(Pokemon)
-  })
-}
-  PokemonAdd()
+          console.log(Pokemon);
+        });
+      }
+      PokemonAdd();
 
       const buttonInfo = document.getElementById(item.name);
       const button = buttonInfo.querySelector(".info");
 
-      button.addEventListener("click", async() => {
+      button.addEventListener("click", async () => {
         if (document.querySelector("#modal")) {
           modal.remove();
         } else {
           const habilidades = await fetch(dados.abilities[0].ability.url);
           const habilidades2 = await fetch(dados.abilities[1].ability.url);
           const Locais = await fetch(dados.location_area_encounters);
-          const Movimento1 = await fetch(dados.moves[0].move.url );
-          const Movimento2 = await fetch(dados.moves[1].move.url );
-          const Movimento3 = await fetch(dados.moves[2].move.url );
-          const Movimento4 = await fetch(dados.moves[3].move.url );
-          const Movimento5 = await fetch(dados.moves[4].move.url );
+          const Movimento1 = await fetch(dados.moves[0].move.url);
+          const Movimento2 = await fetch(dados.moves[1].move.url);
+          const Movimento3 = await fetch(dados.moves[2].move.url);
+          const Movimento4 = await fetch(dados.moves[3].move.url);
+          const Movimento5 = await fetch(dados.moves[4].move.url);
           console.log(habilidades);
           console.log(habilidades2);
           console.log(Locais);
@@ -237,31 +235,31 @@ console.log(Favoritos)
             }</p>
                         <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${
                           dados.moves[0]
-                             ?dados.moves[0].version_group_details[0]
+                            ? dados.moves[0].version_group_details[0]
                                 ?.move_learn_method.name
                             : "Não há"
                         }</p>
                         <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${
                           dados.moves[0]
-                            ?dados.moves[0].version_group_details[1]
+                            ? dados.moves[0].version_group_details[1]
                                 ?.move_learn_method.name
                             : "Não há"
                         }</p>
                         <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${
                           dados.moves[0]
-                            ?dados.moves[0].version_group_details[2]
+                            ? dados.moves[0].version_group_details[2]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
                         <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${
                           dados.moves[0]
-                            ?dados.moves[0].version_group_details[3]
+                            ? dados.moves[0].version_group_details[3]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
                         <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${
                           dados.moves[0]
-                            ?dados.moves[0].version_group_details[4]
+                            ? dados.moves[0].version_group_details[4]
                                 ?.move_learn_method.name
                             : "Não há"
                         },</p>
@@ -281,9 +279,8 @@ console.log(Favoritos)
         }
       });
     }, 1500);
-  
   }
-  
+
   const prevBtn = document.querySelector("#prev");
 
   const btnNext = document.querySelector("#next");
@@ -300,7 +297,6 @@ console.log(Favoritos)
     nextPage();
   });
   prevBtn.setAttribute("disabled", true);
-   
 }
 
 pegarPokemons();
@@ -332,18 +328,16 @@ async function nextPage() {
           <button id="${item.name}fav" class="Estrela">★</button>
             </div>
                 <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
+                <img src="${dados.sprites.front_default}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
         `
-      );
-      const botaoAdd = document.getElementById(`${item.name}fav`)
-      botaoAdd.addEventListener("click", () => {
-      console.log(item.name) 
-    
-  })
-
+    );
+    const botaoAdd = document.getElementById(`${item.name}fav`);
+    botaoAdd.addEventListener("click", () => {
+      console.log(item.name);
+    });
 
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
@@ -548,33 +542,33 @@ async function nextPage() {
               ? movimentosJson5.effect_entries[0].effect
               : "Não há"
           }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${dados.moves[0] ?
+                            <p><strong><em>Método de aprendizagem do movimento 1:</em></strong> ${
                               dados.moves[0]
-                                .dados.moves[0].version_group_details[0]
+                                ? dados.moves[0].version_group_details[0]
                                     ?.move_learn_method.name
                                 : "Não há"
                             }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${dados.moves[0] ?
+                            <p><strong><em>Método de aprendizagem do movimento 2:</em></strong> ${
                               dados.moves[0]
-                                .dados.moves[0].version_group_details[1]
+                                ? dados.moves[0].version_group_details[1]
                                     ?.move_learn_method.name
                                 : "Não há"
                             }</p>
-                            <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${dados.moves[0] ?
+                            <p><strong><em>Método de aprendizagem do movimento 3:</em></strong> ${
                               dados.moves[0]
-                                .dados.moves[0].version_group_details[2]
+                                ? dados.moves[0].version_group_details[2]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
-                            <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${dados.moves[0] ?
+                            <p><strong><em>Método de aprendizagem do movimento 4:</em></strong> ${
                               dados.moves[0]
-                                .dados.moves[0].version_group_details[3]
+                                ? dados.moves[0].version_group_details[3]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
-                            <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${dados.moves[0] ?
+                            <p><strong><em>Método de aprendizagem do movimento 5:</em></strong> ${
                               dados.moves[0]
-                                .dados.moves[0].version_group_details[4]
+                                ? dados.moves[0].version_group_details[4]
                                     ?.move_learn_method.name
                                 : "Não há"
                             },</p>
@@ -595,8 +589,6 @@ async function nextPage() {
     });
   }
 }
-
-
 
 function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
@@ -623,44 +615,58 @@ function VerificarLogado() {
 }
 VerificarLogado();
 
+async function pegarFavoritos() {
+  const favoritos = await fetch("http://localhost:3001/pokemon");
+  const favoritosRes = await favoritos.json();
 
-const BotaoFavs = document.querySelector(".botaoFavoritoLista")
-BotaoFavs.addEventListener("click", ()=>{
+  const BotaoFavs = document.querySelector(".botaoFavoritoLista");
+  BotaoFavs.addEventListener("click", () => {
+    const ul = document.querySelector(".ListaPokemonsFavoritados");
+    BotaoFavs.innerHTML = "Pokémons Favoritados";
+    if (ul) {
+      ul.remove();
+    } else {
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        `
+        <ul class="ListaPokemonsFavoritados">
+        <div class="TituloFavorito">
+        <h1>Pokémons Favoritos:</h1>
+        </div>
+        </ul>
+        `
+      );
+      BotaoFavs.innerHTML = "Fechar Favoritos";
+      const ul = document.querySelector(".ListaPokemonsFavoritados");
+      for (const PokeFavorito of favoritosRes) {
+        setTimeout(async () => {
+          const imagem = await fetch(PokeFavorito.img);
+          const imagemRes = imagem.url;
 
-  const PokemonsFavoritosLista = document.querySelector("#ListaPokemonsFavoritados")
-  if(PokemonsFavoritosLista){
-    PokemonsFavoritosLista.remove()
-  }else{
+          console.log(imagemRes);
 
-    document.body.insertAdjacentHTML("afterbegin", `
-      <ul id="ListaPokemonsFavoritados">
-      <li class"PokemonsFavoritados"></li>
-      </ul>
-      `)
-      
+          ul.insertAdjacentHTML(
+            "beforeend",
+            `
+        <li class="PokemonsFavoritados">
+          <button class="removerFavorito">X</button>
+          <p>${PokeFavorito.name}</p>
+          <img src="${PokeFavorito.img}">
+        </li>
+      `
+          );
+        }, 0);
+
+        console.log(PokeFavorito.name);
+      }
     }
-})
+  });
+}
 
+pegarFavoritos();
 
-// async function favoritar(listaPokemon) {
-//   const obj = {
-//       userId: localStorage.getItem("userId"),
-//       pokemons: listaPokemon
+// ver sobre atualizar a lista de favoritos quando abrir, melhorar um pouco o css e fazer um botão de sair para deslogar
+// que é preciso tirar o meu obj do localstorage chamado de islogged quando clicar no botao de sair, fazer modal de avisos
+// ver pra tentar arrumar fazendo um tratamento de errado para só ter um pokemon de cada nos favoritos, da pra fazer
+// que quando clique no mesmo botao de add nos favoritos, dê erro.
 
-//   }
-//   const botaoFavorito = document.querySelector(".botaoFavorito")
-//   // const favoritos = await fetch("http://localhost:3001/pokemon",{
-//   //   method: "POST",
-//   //   body: JSON.stringify(obj)
-//   // }
-//   // )
-//   botaoFavorito.addEventListener("click",()=>{
-//     document.body.insertAdjacentHTML("beforeend",`
-//       <ul id="ListaPokemonFavoritos">
-//       <li>teste</li>
-//       </ul>
-//       `)
-//   })
-
-// }
-// favoritar()
