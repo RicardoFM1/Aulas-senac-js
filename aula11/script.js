@@ -1,4 +1,5 @@
 let offset = 0;
+let favoritos = []
 async function pegarPokemons() {
   const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/", {
     headers: {
@@ -22,7 +23,7 @@ async function pegarPokemons() {
         `
             <li id="${item.name}">
             <div class="botaoFavorito">
-            <button class="Estrela">★</button>
+            <button id="${item.name}fav" class="Estrela">★</button>
             </div>
                 <p class="nomePoke">${item.name}</p>
                 <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
@@ -31,15 +32,40 @@ async function pegarPokemons() {
             
         `
       );
-        const botaoAdd = document.querySelector(".Estrela")
-      botaoAdd.addEventListener("click", () => {
-      console.log(item, "pokemons")   // ------ precisa iterar sobre cada um, oq já faz, porém apenas sobre o que tu clicar.
-    
+async function PokemonAdd(){
+  const UserId = localStorage.getItem("userId")
+  const botaoAdd = document.getElementById(`${item.name}fav`)
+  botaoAdd.addEventListener("click", async() => {
+    console.log(item.name) 
+    const Pokemon = {                     // --- quando clicar no botao de favoritar, colocar na api "pokemon" o pokemon que favoritou, 
+    // depois disso, pegar do api as informações e colocar dentro do lista que é criada quando abre o botao de favoritos
+      
+      "name": item.name,
+      "img": dados.sprites.front_shiny,
+      "userId": UserId
+    }
+     const Favoritos = await fetch("http://localhost:3001/pokemon", 
+      {
+            body: JSON.stringify(Pokemon),
+            method: "POST",
+            headers:  {
+                'Content-Type':"application/json; charset=utf-8"
+            }
+        })
+  
+console.log(Favoritos)
+      
+
+
+    console.log(Pokemon)
   })
+}
+  PokemonAdd()
+
       const buttonInfo = document.getElementById(item.name);
       const button = buttonInfo.querySelector(".info");
 
-      button.addEventListener("click", async () => {
+      button.addEventListener("click", async() => {
         if (document.querySelector("#modal")) {
           modal.remove();
         } else {
@@ -303,15 +329,21 @@ async function nextPage() {
       `
           <li id="${item.name}">
             <div class="botaoFavorito">
-            <button class="Estrela">★</button>
+          <button id="${item.name}fav" class="Estrela">★</button>
             </div>
                 <p class="nomePoke">${item.name}</p>
                 <img src="${dados.sprites.front_shiny}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
-                  
-                  `
-    );
+            
+        `
+      );
+      const botaoAdd = document.getElementById(`${item.name}fav`)
+      botaoAdd.addEventListener("click", () => {
+      console.log(item.name) 
+    
+  })
+
 
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
@@ -592,7 +624,22 @@ function VerificarLogado() {
 VerificarLogado();
 
 
-  
+const BotaoFavs = document.querySelector(".botaoFavoritoLista")
+BotaoFavs.addEventListener("click", ()=>{
+
+  const PokemonsFavoritosLista = document.querySelector("#ListaPokemonsFavoritados")
+  if(PokemonsFavoritosLista){
+    PokemonsFavoritosLista.remove()
+  }else{
+
+    document.body.insertAdjacentHTML("afterbegin", `
+      <ul id="ListaPokemonsFavoritados">
+      <li class"PokemonsFavoritados"></li>
+      </ul>
+      `)
+      
+    }
+})
 
 
 // async function favoritar(listaPokemon) {
