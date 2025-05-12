@@ -400,12 +400,18 @@ fieldset {
   position: absolute;
   right: 12px;
   top: 12px;
+ 
+  
 }
 .Estrela {
-  width: 100%;
-  border: none;
-  background-color: #c7696e;
-  padding: 0 4px;
+ border: none;
+ background-color: gray;
+ width: 15px;
+   height: 15px;
+}
+.botaoFavorito .estrelaImg{
+    height: 24px;
+    width: 24px;
 }
 li {
   position: relative;

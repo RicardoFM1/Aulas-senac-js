@@ -23,7 +23,7 @@ async function pegarPokemons() {
         `
             <li id="${item.name}">
             <div class="botaoFavorito">
-            <button id="${item.name}fav" class="Estrela">★</button>
+            <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
             </div>
                 <p class="nomePoke">${item.name}</p>
                 <img src="${dados.sprites.front_default}" alt="Imagem pokémon">
@@ -32,20 +32,59 @@ async function pegarPokemons() {
             
         `
       );
-      async function PokemonAdd() {
+      function PokemonAdd() {
         const UserId = localStorage.getItem("userId");
         const botaoAdd = document.getElementById(`${item.name}fav`);
+        const img = document.getElementById(`${item.name}img`);
+        let éFavorito = false;
         botaoAdd.addEventListener("click", async () => {
+          if (éFavorito) {
+            document.body.insertAdjacentHTML(
+              "beforeend",
+              `
+                <div class="toast erro">
+                <p>Você removeu este item dos favoritos!</p>
+                </div>
+                `
+            );
+            img.src = "./Botaofav/botaofav.png";
+            await fetch(
+              `http://localhost:3001/pokemon/${item.name}?userId=${UserId}`,
+              {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+                },
+              }
+            );
+
+            const listaFavoritos = document.querySelectorAll(
+              ".PokemonsFavoritados"
+            );
+            listaFavoritos.forEach((li) => {
+              if (li.querySelector("p")?.textContent === item.name) {
+                li.remove();
+              }
+            });
+          } else {
+            document.body.insertAdjacentHTML(
+              "beforeend",
+              `
+              <div class="toast sucesso">
+              <p>Você adicionou este item aos favoritos!</p>
+              </div>
+              `
+            );
+            img.src = "./Botaofav/botaofav2.png";
+          }
+
           console.log(item.name);
           const Pokemon = {
-            // --- quando clicar no botao de favoritar, colocar na api "pokemon" o pokemon que favoritou,
-            // depois disso, pegar do api as informações e colocar dentro do lista que é criada quando abre o botao de favoritos
-
             name: item.name,
             img: dados.sprites.front_default,
             userId: UserId,
           };
-          const Favoritos = await fetch("http://localhost:3001/pokemon", {
+          const Favoritos = await fetch(`http://localhost:3001/pokemon`, {
             body: JSON.stringify(Pokemon),
             method: "POST",
             headers: {
@@ -53,8 +92,8 @@ async function pegarPokemons() {
             },
           });
 
+          éFavorito = !éFavorito;
           console.log(Favoritos);
-
           console.log(Pokemon);
         });
       }
@@ -334,10 +373,37 @@ async function nextPage() {
             
         `
     );
-    const botaoAdd = document.getElementById(`${item.name}fav`);
-    botaoAdd.addEventListener("click", () => {
-      console.log(item.name);
-    });
+    async function PokemonAdd() {
+      const UserId = localStorage.getItem("userId");
+      const botaoAdd = document.getElementById(`${item.name}fav`);
+      botaoAdd.addEventListener("click", async () => {
+        console.log(item.name);
+        const Pokemon = {
+          name: item.name,
+          img: dados.sprites.front_default,
+          userId: UserId,
+        };
+        const Favoritos = await fetch(`http://localhost:3001/pokemon`, {
+          body: JSON.stringify(Pokemon),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        });
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `
+                <div class="toast sucesso">
+                    <p>Pokémon Favoritado com sucesso!</p>
+                </div>
+                `
+        );
+        console.log(Favoritos);
+
+        console.log(Pokemon);
+      });
+    }
+    PokemonAdd();
 
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
@@ -610,13 +676,21 @@ function VerificarLogado() {
   } else {
     botaoLoginHome.remove();
     botaoCadastroHome.removeAttribute("href");
-    botaoCadastroHome.innerHTML = "Usuario cadastrado";
+    botaoCadastroHome.innerHTML = "Sair";
+    botaoCadastroHome.addEventListener("click", () => {
+      localStorage.removeItem("Islogged");
+      localStorage.removeItem("userId");
+      location.href = "/";
+    });
   }
 }
 VerificarLogado();
 
 async function pegarFavoritos() {
-  const favoritos = await fetch("http://localhost:3001/pokemon");
+  const userId = localStorage.getItem("userId");
+  const favoritos = await fetch(
+    `http://localhost:3001/pokemon/?userId=${userId}`
+  );
   const favoritosRes = await favoritos.json();
 
   const BotaoFavs = document.querySelector(".botaoFavoritoLista");
@@ -668,5 +742,5 @@ pegarFavoritos();
 // ver sobre atualizar a lista de favoritos quando abrir, melhorar um pouco o css e fazer um botão de sair para deslogar
 // que é preciso tirar o meu obj do localstorage chamado de islogged quando clicar no botao de sair, fazer modal de avisos
 // ver pra tentar arrumar fazendo um tratamento de errado para só ter um pokemon de cada nos favoritos, da pra fazer
-// que quando clique no mesmo botao de add nos favoritos, dê erro.
-
+// removendo o item da lista de favoritos quando clicar dnv
+// arrumar que quando atualiza a página sai o botao de favorito
