@@ -16,9 +16,9 @@ async function pegarPokemons() {
       const data = await fetch(item.url);
       const dados = await data.json();
 
-      ul.insertAdjacentHTML(
-        "beforeend",
-        `
+    ul.insertAdjacentHTML(
+      "beforeend",
+      `
             <li id="${item.name}">
             <div class="botaoFavorito">
             <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
@@ -29,14 +29,15 @@ async function pegarPokemons() {
             </li>
             
         `
-      );
+    );
       function PokemonAdd() {
         const UserId = localStorage.getItem("userId");
         const botaoAdd = document.getElementById(`${item.name}fav`);
         const img = document.getElementById(`${item.name}img`);
         let eFavorito = false;
         botaoAdd.addEventListener("click", async () => {
-      
+          
+  
           if (eFavorito) {
             document.body.insertAdjacentHTML(
               "beforeend",
@@ -89,8 +90,9 @@ async function pegarPokemons() {
           console.log(response.id,"id")
           botaoAdd.setAttribute("data-fav",response.id)
           eFavorito = !eFavorito;
-        }});
-        
+        }
+       
+        });
       }
       PokemonAdd();
 
@@ -805,8 +807,7 @@ async function atualizarFavoritos() {
   });
 }
 
-// melhorar um pouco o css(opcional caso tiver tempo)
-// ver pra tentar arrumar fazendo um tratamento de erro para só ter um pokemon de cada nos favoritos, da pra fazer
-// removendo o item da lista de favoritos quando clicar dnv
+
+
 // arrumar que quando atualiza a página sai o botao de favorito
-// arrumar o fato que precisa reiniciar o servidor pra ver os favoritos que foram apagados
+
