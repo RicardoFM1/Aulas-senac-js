@@ -1,7 +1,7 @@
 let offset = 0;
 let favoritos = [];
 async function pegarPokemons() {
-  const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/", {
+  const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20", {
     headers: {
       Accept: "application/json",
     },
@@ -24,7 +24,7 @@ async function pegarPokemons() {
             <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
             </div>
                 <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.front_default}" alt="Imagem pokémon">
+                <img src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
@@ -34,9 +34,10 @@ async function pegarPokemons() {
         const UserId = localStorage.getItem("userId");
         const botaoAdd = document.getElementById(`${item.name}fav`);
         const img = document.getElementById(`${item.name}img`);
-        let éFavorito = false;
+        let eFavorito = false;
         botaoAdd.addEventListener("click", async () => {
-          if (éFavorito) {
+      
+          if (eFavorito) {
             document.body.insertAdjacentHTML(
               "beforeend",
               `
@@ -45,9 +46,11 @@ async function pegarPokemons() {
                 </div>
                 `
             );
+            const idFav = botaoAdd.getAttribute("data-fav")
+            console.log(idFav,"fav id")
             img.src = "./Botaofav/botaofav.png";
             await fetch(
-              `http://localhost:3001/pokemon/${item.name}?userId=${UserId}`,
+              `http://localhost:3001/pokemon/${idFav}`,
               {
                 method: "DELETE",
                 headers: {
@@ -55,15 +58,8 @@ async function pegarPokemons() {
                 },
               }
             );
-
-            const listaFavoritos = document.querySelectorAll(
-              ".PokemonsFavoritados"
-            );
-            listaFavoritos.forEach((li) => {
-              if (li.querySelector("p")?.textContent === item.name) {
-                li.remove();
-              }
-            });
+            botaoAdd.removeAttribute("data-fav")
+             eFavorito = !eFavorito;
           } else {
             document.body.insertAdjacentHTML(
               "beforeend",
@@ -75,23 +71,25 @@ async function pegarPokemons() {
             );
             atualizarFavoritos();
             img.src = "./Botaofav/botaofav2.png";
-          }
-
-          const Pokemon = {
-            name: item.name,
-            img: dados.sprites.front_default,
-            userId: UserId,
-          };
-          await fetch(`http://localhost:3001/pokemon`, {
+            
+            
+            const Pokemon = {
+              name: item.name,
+              img: dados.sprites.other.dream_world.front_default,
+              userId: UserId,
+            };
+          const res = await fetch(`http://localhost:3001/pokemon`, {
             body: JSON.stringify(Pokemon),
             method: "POST",
             headers: {
               "Content-Type": "application/json; charset=utf-8",
             },
           });
-
-          éFavorito = !éFavorito;
-        });
+          const response = await res.json()
+          console.log(response.id,"id")
+          botaoAdd.setAttribute("data-fav",response.id)
+          eFavorito = !eFavorito;
+        }});
         
       }
       PokemonAdd();
@@ -135,18 +133,20 @@ async function pegarPokemons() {
                         <h1>${item.name}</h1>
                         <p>
                         <strong><em>Habilidade:</em></strong> ${
-                          dados.abilities[0].ability.name
-                        }
+                              dados.abilities[0]
+                                ? dados.abilities[0]?.ability.name
+                                : "Não há"
+                            }
                         </p>
 
                         <p>
                         <strong><em>Efeito:</em></strong> 
-                        ${habilidadesJson.effect_entries[0].effect}
+                        ${habilidadesJson.effect_entries[0]? habilidadesJson.effect_entries[0].effect: "Não há"}
                         </p>
 
                         <p>
                         <strong><em>Efeito rápido:</em></strong> 
-                        ${habilidadesJson.effect_entries[0].short_effect}
+                        ${habilidadesJson.effect_entries[0] ? habilidadesJson.effect_entries[0].short_effect: "Não há"}
                         </p>
 
                         <p>
@@ -340,7 +340,7 @@ async function nextPage() {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
   const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?offset=${offset}`,
+    `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`,
     {
       headers: {
         "Content-type": "application/json; charset=utf-8",
@@ -362,7 +362,7 @@ async function nextPage() {
             <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
             </div>
                 <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.front_default}" alt="Imagem pokémon">
+                <img src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
@@ -418,7 +418,7 @@ async function nextPage() {
 
         const Pokemon = {
           name: item.name,
-          img: dados.sprites.front_default,
+          img: dados.sprites.other.dream_world.front_default,
           userId: UserId,
         };
         await fetch(`http://localhost:3001/pokemon`, {
@@ -746,18 +746,16 @@ async function pegarFavoritos() {
       const ul = document.querySelector(".ListaPokemonsFavoritados");
 
       for (const PokeFavorito of favoritosRes) {
-        setTimeout(async () => {
           ul.insertAdjacentHTML(
             "beforeend",
             `
         <li class="PokemonsFavoritados">
-          <button class="removerFavorito">X</button>
-          <p>${PokeFavorito.name}</p>
+          <p class="nomePoke">${PokeFavorito.name}</p>
           <img src="${PokeFavorito.img}">
         </li>
       `
           );
-        }, 0);
+        
       }
     }
     atualizarFavoritos();
@@ -797,8 +795,7 @@ async function atualizarFavoritos() {
           "beforeend",
           `
         <li class="PokemonsFavoritados">
-          <button class="removerFavorito">X</button>
-          <p>${PokeFavorito.name}</p>
+          <p class="nomePoke">${PokeFavorito.name}</p>
           <img src="${PokeFavorito.img}">
         </li>
       `
@@ -809,9 +806,7 @@ async function atualizarFavoritos() {
 }
 
 // melhorar um pouco o css(opcional caso tiver tempo)
-// fazer modal de avisos
-// ver pra tentar arrumar fazendo um tratamento de errado para só ter um pokemon de cada nos favoritos, da pra fazer
+// ver pra tentar arrumar fazendo um tratamento de erro para só ter um pokemon de cada nos favoritos, da pra fazer
 // removendo o item da lista de favoritos quando clicar dnv
 // arrumar que quando atualiza a página sai o botao de favorito
-// arrumar o fato que precisa clicar 2x pra abrir o favoritos(opcional)
 // arrumar o fato que precisa reiniciar o servidor pra ver os favoritos que foram apagados
