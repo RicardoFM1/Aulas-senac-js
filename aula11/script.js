@@ -809,5 +809,6 @@ async function atualizarFavoritos() {
 
 
 
-// arrumar que quando atualiza a página sai o botao de favorito ()
+// arrumar que quando atualiza a página sai o botao de favorito (fazer uma comparação entre minha api de favoritos
+// e a listagem de pokémons que estão na tela)
 
