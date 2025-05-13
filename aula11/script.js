@@ -809,5 +809,5 @@ async function atualizarFavoritos() {
 
 
 
-// arrumar que quando atualiza a página sai o botao de favorito
+// arrumar que quando atualiza a página sai o botao de favorito ()
 
