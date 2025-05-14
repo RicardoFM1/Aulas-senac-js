@@ -101,6 +101,7 @@ body {
 .nomePoke {
   font-size: 20px;
   font-weight: 600;
+  color: black;
 }
 
 .informacoesPoke p {
@@ -464,7 +465,7 @@ li {
   display: flex;
   justify-content: space-around;
 }
-.PokemonsFavoritados img{
+.PokemonsFavoritados .imgPoke{
   height: 100px;
   width: 100px;
 }
@@ -501,4 +502,11 @@ li {
 }
 .fecharFavoritosDiv {
   background-color: rgb(29, 211, 99);
+}
+.imgRemove{
+  border: none;
+  cursor: pointer;
+}
+.removerFavoritoBtn:hover{
+  background-color: #944242;
 }
