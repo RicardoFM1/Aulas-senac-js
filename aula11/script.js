@@ -727,32 +727,51 @@ function VerificarLogado() {
 }
 VerificarLogado();
 
+let listaAberta = false;
+
+
+function exibirModal(mensagem) {
+
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.innerHTML = `
+    <div class="toast erro">
+      <p>${mensagem}</p>
+     
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  
+  modal.querySelector('.fechar-modal').addEventListener('click', () => {
+    modal.remove();
+  });
+}
+
+
 async function PegarFavoritos() {
   const userId = localStorage.getItem("userId");
   const res = await fetch(`http://localhost:3001/pokemon/?userId=${userId}`);
   const favoritos = await res.json();
-  const estrelaImg = document.querySelector(".estrelaImg")
-  const ulExistente = document.querySelector(".ListaPokemonsFavoritados");
-  const ImgFav = document.querySelector(".FavoritoImg")
-  if (ulExistente) {
-    ulExistente.remove();
+
+  const imgBotao = document.getElementById("FavoritoImg");
+
+  
+  if (listaAberta) {
+    const ulExistente = document.querySelector(".ListaPokemonsFavoritados");
+    if (ulExistente) ulExistente.remove();
+    imgBotao.src = "./imagens/downloadpoke.png"; 
+    listaAberta = false;
+    return; 
   }
 
   
   if (favoritos.length === 0) {
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      `
-      <div class="toast erro">
-        <div>
-          <p>Você ainda não adicionou nenhum Pokémon aos favoritos!</p>
-        </div>
-      </div>
-      `
-    );
-    return; 
+    exibirModal("Você ainda não possui Pokémons favoritos!");
+    return;
   }
 
+  
   document.body.insertAdjacentHTML(
     "beforeend",
     `
@@ -763,6 +782,8 @@ async function PegarFavoritos() {
     </ul>
     `
   );
+  imgBotao.src = "./imagens/tabler--pokeball-off.svg";
+  listaAberta = true; 
 
   const ul = document.querySelector(".ListaPokemonsFavoritados");
 
@@ -773,7 +794,7 @@ async function PegarFavoritos() {
       <li class="PokemonsFavoritados" style="background-color: ${pokeFavorito.color}">
         <p class="nomePoke">${pokeFavorito.name}</p>
         <img class="imgPoke" src="${pokeFavorito.img}">
-        <button class="removerFavoritoBtn imgRemove" style="background-color: ${pokeFavorito.color}" data-id="${pokeFavorito.id}">
+        <button class="removerFavoritoBtn imgRemove" style="background-color: ${pokeFavorito.color}" data-id="${pokeFavorito.id}" data-name="${pokeFavorito.name}">
           <img src="./imagens/mdi--remove.svg" alt="Remover">
         </button>
       </li>
@@ -781,40 +802,45 @@ async function PegarFavoritos() {
     );
   }
 
-  
-  const botoesRemover = document.querySelectorAll(".removerFavoritoBtn");
-  botoesRemover.forEach((btn) => {
+
+  document.querySelectorAll(".removerFavoritoBtn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.getAttribute("data-id");
+      const name = btn.getAttribute("data-name");
 
-     
+      
         const response = await fetch(`http://localhost:3001/pokemon/${id}`, {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         });
 
         if (response.ok) {
-  btn.closest("li").remove();
+          btn.closest("li").remove(); 
 
-  
-  const favBtn = document.getElementById(`${pokeFavorito.name}fav`);
-  const favImg = document.getElementById(`${pokeFavorito.name}img`);
-  if (favBtn && favImg) {
-    favImg.src = "./imagens/Botaofav/botaofav.svg";
-    favBtn.removeAttribute("data-fav"); 
-  }
+          const favBtn = document.getElementById(`${name}img`);
+          if (favBtn) {
+            favBtn.src = "./imagens/Botaofav/botaofav.svg"; 
+          }
 
-  
-  if (document.querySelectorAll(".PokemonsFavoritados").length === 0) {
-    PegarFavoritos();
-  }
-}
+          
+          if (document.querySelectorAll(".removerFavoritoBtn").length === 0) {
+            document.querySelector(".ListaPokemonsFavoritados").remove();
+            imgBotao.src = "./imagens/downloadpoke.png"; 
+            listaAberta = false; 
+            exibirModal("Você removeu todos os seus favoritos.");
+          }
+        }
+      
       }
-    );
-  });
-}
+    )});
+  };
+
+
+
+
+  
+  PegarFavoritos();
+;
 
 
 
