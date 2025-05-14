@@ -1,0 +1,21 @@
+export const cores = {
+    normal:"#7a7a7ac2",
+    poison:"#9932CC",
+    grass:"#1ceb64",
+    fire: "#D2691E",
+    water:"#4169E1",
+    bug:"#9ACD32",
+    electric:"#FFFF00",
+    ground:"#FF7F50",
+    fairy:"#FF00FF",
+    fighting:"#FFE4B5",
+    psychic:"#8B008B",
+    rock:"#696969",
+    ghost:"#E6E6FA",
+    fairy:"#FF00FF",
+    flying:"#696969",
+    dragon:"#87CEEB",
+    ice:"#AFEEEE",
+    steel:"#DCDCDC",
+    dark:"#2F4F4F"
+}

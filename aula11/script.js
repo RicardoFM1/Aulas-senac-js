@@ -1,5 +1,6 @@
+import {cores} from "./cores.js"
 let offset = 0;
-let favoritos = [];
+
 async function pegarPokemons() {
   const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20", {
     headers: {
@@ -16,20 +17,21 @@ async function pegarPokemons() {
       const data = await fetch(item.url);
       const dados = await data.json();
 
-    ul.insertAdjacentHTML(
-      "beforeend",
-      `
-            <li id="${item.name}">
-            <div class="botaoFavorito">
-            <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
-            </div>
-                <p class="nomePoke">${item.name}</p>
-                <img src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
-                <button class="info">Mais informações</button> 
-            </li>
-            
-        `
-    );
+   ul.insertAdjacentHTML(
+  "beforeend",
+  `
+    <li id=${item.name} style="background-color:${cores[dados.types[0].type.name]}">
+      <div class="botaoFavorito">
+        <button id="${item.name}fav" class="Estrela">
+          <img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.svg" alt="">
+        </button>
+      </div>
+      <p class="nomePoke">${item.name}</p>
+      <img src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
+      <button class="info">Mais informações</button> 
+    </li>
+  `
+);
       function PokemonAdd() {
         const UserId = localStorage.getItem("userId");
         const botaoAdd = document.getElementById(`${item.name}fav`);
@@ -49,7 +51,7 @@ async function pegarPokemons() {
             );
             const idFav = botaoAdd.getAttribute("data-fav")
             console.log(idFav,"fav id")
-            img.src = "./Botaofav/botaofav.png";
+            img.src = "./Botaofav/botaofav.svg";
             await fetch(
               `http://localhost:3001/pokemon/${idFav}`,
               {
@@ -71,7 +73,7 @@ async function pegarPokemons() {
               `
             );
             atualizarFavoritos();
-            img.src = "./Botaofav/botaofav2.png";
+            img.src = "./Botaofav/botaofav2.svg";
             
             
             const Pokemon = {
@@ -359,9 +361,9 @@ async function nextPage() {
     ul.insertAdjacentHTML(
       "beforeend",
       `
-            <li id="${item.name}">
+            <li id=${item.name} style="background-color:${cores[dados.types[0].type.name]}">
             <div class="botaoFavorito">
-            <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.png" alt=""></button>
+            <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./Botaofav/botaofav.svg" alt=""></button>
             </div>
                 <p class="nomePoke">${item.name}</p>
                 <img src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
@@ -386,7 +388,7 @@ async function nextPage() {
                 </div>
                 `
           );
-          img.src = "./Botaofav/botaofav.png";
+          img.src = "./Botaofav/botaofav.svg";
           await fetch(
             `http://localhost:3001/pokemon/${item.name}?userId=${UserId}`,
             {
@@ -415,7 +417,7 @@ async function nextPage() {
               `
           );
           atualizarFavoritos();
-          img.src = "./Botaofav/botaofav2.png";
+          img.src = "./Botaofav/botaofav2.svg";
         }
 
         const Pokemon = {
@@ -751,7 +753,7 @@ async function pegarFavoritos() {
           ul.insertAdjacentHTML(
             "beforeend",
             `
-        <li class="PokemonsFavoritados">
+        <li class="PokemonsFavoritados" >
           <p class="nomePoke">${PokeFavorito.name}</p>
           <img src="${PokeFavorito.img}">
         </li>
@@ -811,4 +813,5 @@ async function atualizarFavoritos() {
 
 // arrumar que quando atualiza a página sai o botao de favorito (fazer uma comparação entre minha api de favoritos
 // e a listagem de pokémons que estão na tela)
+// mudar o botao de abrir favoritos para uma imagem de uma pokebola fechada e dps pra mudar pra uma aberta
 
