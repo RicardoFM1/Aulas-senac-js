@@ -20,11 +20,23 @@ body {
   background-color: white;
   padding: 10px;
   border-bottom: 1px solid gray;
-  border-radius: 2px 0 0 0 0;
+  border-radius: 2px 0 0 0;
+  background-image: url("./imagens/fundopokemon.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: 1px solid black;
+
 }
 .header_ul h1 {
   font-size: 24px;
   background-color: yellow;
+}
+.navegacao img{
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
 }
 .Titulo {
   display: flex;
@@ -52,7 +64,7 @@ body {
 }
 #modal {
   position: fixed;
-  bottom: 3%;
+  bottom: 7%; 
   left: 50%;
   transform: translateX(-50%);
   gap: 20px;
@@ -88,6 +100,7 @@ body {
 }
 .nomePoke {
   font-size: 20px;
+  font-weight: 600;
 }
 
 .informacoesPoke p {
@@ -142,7 +155,7 @@ li {
   background-color: #ffffff;
   border-radius: 2px 0 0 0;
 }
-.pokemons img {
+.pokemons .imgPoke {
   width: 96px;
   height: 96px;
 }
@@ -156,21 +169,21 @@ li {
 }
 .logo {
   position: absolute;
-  top: 90px;
-  left: 48%;
+  top: 8%;
+  left: 48.5%;
   width: 70px;
 }
 .pokebola1 {
   position: absolute;
-  top: 10%;
+  top: 7%;
   left: 34%;
   z-index: 2;
   width: 60px;
 }
 .pokebola2 {
   position: absolute;
-  bottom: -1%;
-  right: 33%;
+  bottom: 3%;
+  right: 32%;
   z-index: 999;
   width: 100px;
 }
@@ -274,31 +287,26 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  background-color: #08a2a6;
-  border: none;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 24px;
-  padding: 0 10px 1px 10px;
-  margin: 8px;
+  margin: 15px 5px 0 0;
   cursor: pointer;
+}
+#imgCadastrar{
+  height: 48px;
+  width: 48px;
 }
 .botaoLoginHome {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(255, 255, 255);
-  background-color: #102671;
-  border: 1px solid white;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 24px;
-  width: 100px;
-  padding: 0 10px 0px 10px;
-  margin: 7px;
+  margin-top: 1px 5px 0 0;
   cursor: pointer;
 }
+#imgLogin{
+  height: 48px;
+  width: 36px;
+}
 .botaoLoginHome:hover {
-  background-color: gray;
+  background-color: rgba(149, 226, 175, 0.411);
 }
 .botaoCadastroHome:hover {
   background-color: rgba(15, 232, 141, 0.304);
@@ -395,6 +403,7 @@ fieldset {
   border-radius: 10px;
   border: 1px solid black;
   box-shadow: 10px 5px 10px 10px #bec7e2;
+  background-color: red;
 }
 .botaoFavorito {
   display: flex;
@@ -416,19 +425,24 @@ li {
   position: relative;
 }
 .lista {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  position: fixed;
+  right: 10px;
+  bottom: 50%;
 }
 .botaoFavoritoLista {
   color: white;
-  background-color: #08a2a6;
+  background-color: #1000ee;
   border: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 24px;
   padding: 0 10px 1px 10px;
   margin: 8px;
   cursor: pointer;
+  border-radius: 150px;
+}
+#FavoritoImg{
+  height: 48px;
+  width: 48px;
 }
 .listaFavoritos:hover {
   background-color: rgba(15, 232, 141, 0.304);
