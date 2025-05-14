@@ -701,11 +701,13 @@ function VerificarLogado() {
   const Pokemons = document.querySelector(".pokemons")
   const logo = document.querySelector(".logo")
   const botaoCell = document.querySelector(".homeButton")
+  const ListaFav = document.querySelector(".lista")
   console.log(Islogged);
   if (!Islogged) {
     Pokemons.remove() 
     botaoCell.remove()
     logo.remove()
+    ListaFav.remove()
     document.body.insertAdjacentHTML(
       "beforeend",
       `
