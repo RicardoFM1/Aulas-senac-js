@@ -389,7 +389,6 @@ async function nextPage() {
                 <p>Você removeu este item dos favoritos!</p>
                 </div>
                 `
-<<<<<<< HEAD
           );
           img.src = "./Botaofav/botaofav.svg";
           await fetch(
@@ -414,58 +413,13 @@ async function nextPage() {
           document.body.insertAdjacentHTML(
             "beforeend",
             `
-=======
-            );
-            const idFav = botaoAdd.getAttribute("data-fav")
-            console.log(idFav,"fav id")
-            img.src = "./Botaofav/botaofav.png";
-            await fetch(
-              `http://localhost:3001/pokemon/${idFav}`,
-              {
-                method: "DELETE",
-                headers: {
-                  "Content-Type": "application/json; charset=utf-8",
-                },
-              }
-            );
-            botaoAdd.removeAttribute("data-fav")
-             eFavorito = !eFavorito;
-          } else {
-            document.body.insertAdjacentHTML(
-              "beforeend",
-              `
->>>>>>> a4a36900793d3332375bd32577aa4a66eaf798d2
               <div class="toast sucesso">
               <p>Você adicionou este item aos favoritos!</p>
               </div>
               `
-<<<<<<< HEAD
           );
           atualizarFavoritos();
           img.src = "./Botaofav/botaofav2.svg";
-=======
-            );
-            atualizarFavoritos();
-            img.src = "./Botaofav/botaofav2.png";
-            
-            
-            const Pokemon = {
-              name: item.name,
-              img: dados.sprites.other.dream_world.front_default,
-              userId: UserId,
-            };
-          const res = await fetch(`http://localhost:3001/pokemon`, {
-            body: JSON.stringify(Pokemon),
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
-          });
-          const response = await res.json()
-          console.log(response.id,"id")
-          botaoAdd.setAttribute("data-fav",response.id)
-          eFavorito = !eFavorito;
->>>>>>> a4a36900793d3332375bd32577aa4a66eaf798d2
         }
        
         });
@@ -787,12 +741,7 @@ async function pegarFavoritos() {
           ul.insertAdjacentHTML(
             "beforeend",
             `
-<<<<<<< HEAD
         <li class="PokemonsFavoritados" >
-=======
-        <li class="PokemonsFavoritados">
-        <button id="${PokeFavorito.name}fav" class="removerFavorito">X</button>
->>>>>>> a4a36900793d3332375bd32577aa4a66eaf798d2
           <p class="nomePoke">${PokeFavorito.name}</p>
           <img src="${PokeFavorito.img}">
         </li>
