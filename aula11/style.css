@@ -26,13 +26,12 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   border-bottom: 1px solid black;
-
 }
 .header_ul h1 {
   font-size: 24px;
   background-color: yellow;
 }
-.navegacao img{
+.navegacao img {
   height: 24px;
   width: 24px;
   display: flex;
@@ -64,7 +63,7 @@ body {
 }
 #modal {
   position: fixed;
-  bottom: 7%; 
+  bottom: 7%;
   left: 50%;
   transform: translateX(-50%);
   gap: 20px;
@@ -163,14 +162,14 @@ li {
 
 .homeButton {
   position: absolute;
-  bottom: 18px;
+  bottom: 6%;
   left: 49%;
   z-index: 999;
   width: 38px;
 }
 .logo {
   position: absolute;
-  top: 8%;
+  top: 9%;
   left: 48.5%;
   width: 70px;
 }
@@ -226,6 +225,7 @@ form {
   font-size: 20px;
   background-color: #4d8efed7;
   font-family: "Courier New", Courier, monospace;
+  border-radius: 10px;
 }
 .botaologin {
   display: flex;
@@ -240,6 +240,7 @@ form {
   font-size: 20px;
   background-color: #4d8efed7;
   font-family: "Courier New", Courier, monospace;
+  border-radius: 10px;
 }
 .seCadastrar {
   display: flex;
@@ -268,6 +269,7 @@ form {
   background-color: #4d8efed7;
   pointer-events: none;
   font-family: "Courier New", Courier, monospace;
+  border-radius: 10px;
 }
 .redirecionar {
   text-decoration: underline;
@@ -291,7 +293,7 @@ a {
   margin: 15px 5px 0 0;
   cursor: pointer;
 }
-#imgCadastrar{
+#imgCadastrar {
   height: 48px;
   width: 48px;
 }
@@ -302,7 +304,7 @@ a {
   margin-top: 1px 5px 0 0;
   cursor: pointer;
 }
-#imgLogin{
+#imgLogin {
   height: 48px;
   width: 36px;
 }
@@ -411,10 +413,9 @@ fieldset {
   top: 12px;
 }
 .Estrela {
- background-color: inherit !important;
+  background-color: inherit !important;
   border: none;
   cursor: pointer;
-  
 }
 .botaoFavorito .estrelaImg {
   height: 24px;
@@ -439,7 +440,7 @@ li {
   cursor: pointer;
   border-radius: 150px;
 }
-#FavoritoImg{
+#FavoritoImg {
   height: 48px;
   width: 48px;
 }
@@ -465,7 +466,7 @@ li {
   display: flex;
   justify-content: space-around;
 }
-.PokemonsFavoritados .imgPoke{
+.PokemonsFavoritados .imgPoke {
   height: 100px;
   width: 100px;
 }
@@ -503,10 +504,10 @@ li {
 .fecharFavoritosDiv {
   background-color: rgb(29, 211, 99);
 }
-.imgRemove{
+.imgRemove {
   border: none;
   cursor: pointer;
 }
-.removerFavoritoBtn:hover{
+.removerFavoritoBtn:hover {
   background-color: #944242;
 }

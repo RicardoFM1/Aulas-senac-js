@@ -1,6 +1,5 @@
-import {cores} from "./cores.js"
+import { cores } from "./cores.js";
 let offset = 0;
-
 
 async function pegarPokemons() {
   const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20", {
@@ -18,81 +17,83 @@ async function pegarPokemons() {
       const data = await fetch(item.url);
       const dados = await data.json();
 
-   ul.insertAdjacentHTML(
-  "beforeend",
-  `
-    <li id=${item.name} style="background-color:${cores[dados.types[0].type.name]}">
+      ul.insertAdjacentHTML(
+        "beforeend",
+        `
+    <li id=${item.name} style="background-color:${
+          cores[dados.types[0].type.name]
+        }">
       <div class="botaoFavorito">
         <button id="${item.name}fav" class="Estrela">
-          <img id="${item.name}img" class="estrelaImg" src="./imagens/Botaofav/botaofav.svg" alt="">
+          <img id="${
+            item.name
+          }img" class="estrelaImg" src="./imagens/Botaofav/botaofav.svg" alt="">
         </button>
       </div>
       <p class="nomePoke">${item.name}</p>
-      <img class="imgPoke" src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
+      <img class="imgPoke" src="${
+        dados.sprites.other.dream_world.front_default
+      }" alt="Imagem pokémon">
       <button class="info">Mais informações</button> 
     </li>
   `
-);
-     function PokemonAdd() {
-  const UserId = localStorage.getItem("userId");
-  const botaoAdd = document.getElementById(`${item.name}fav`);
-  const img = document.getElementById(`${item.name}img`);
-  let eFavorito = false;
+      );
+      function PokemonAdd() {
+        const UserId = localStorage.getItem("userId");
+        const botaoAdd = document.getElementById(`${item.name}fav`);
+        const img = document.getElementById(`${item.name}img`);
+        let eFavorito = false;
 
-  botaoAdd.addEventListener("click", async () => {
-    const idFav = botaoAdd.getAttribute("data-fav");
+        botaoAdd.addEventListener("click", async () => {
+          const idFav = botaoAdd.getAttribute("data-fav");
 
-    if (eFavorito) {
-      
-      document.body.insertAdjacentHTML(
-        "beforeend",
-        `<div class="toast erro">
+          if (eFavorito) {
+            document.body.insertAdjacentHTML(
+              "beforeend",
+              `<div class="toast erro">
            <p>Você removeu este item dos favoritos!</p>
          </div>`
-      );
-      img.src = "./imagens/Botaofav/botaofav.svg"; 
-      await fetch(`http://localhost:3001/pokemon/${idFav}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      });
-      botaoAdd.removeAttribute("data-fav");
-      eFavorito = !eFavorito;
-      
-    } else {
-      
-      document.body.insertAdjacentHTML(
-        "beforeend",
-        `<div class="toast sucesso">
+            );
+            img.src = "./imagens/Botaofav/botaofav.svg";
+            await fetch(`http://localhost:3001/pokemon/${idFav}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+              },
+            });
+            botaoAdd.removeAttribute("data-fav");
+            eFavorito = !eFavorito;
+          } else {
+            document.body.insertAdjacentHTML(
+              "beforeend",
+              `<div class="toast sucesso">
            <p>Você adicionou este item aos favoritos!</p>
          </div>`
-      );
-      img.src = "./imagens/Botaofav/botaofav2.svg"; 
+            );
+            img.src = "./imagens/Botaofav/botaofav2.svg";
 
-      const Pokemon = {
-        name: item.name,
-        img: dados.sprites.other.dream_world.front_default,
-        userId: UserId,
-        color: `${cores[dados.types[0].type.name]}`,
-      };
+            const Pokemon = {
+              name: item.name,
+              img: dados.sprites.other.dream_world.front_default,
+              userId: UserId,
+              color: `${cores[dados.types[0].type.name]}`,
+            };
 
-      const res = await fetch("http://localhost:3001/pokemon", {
-        body: JSON.stringify(Pokemon),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      });
-      const response = await res.json();
-      botaoAdd.setAttribute("data-fav", response.id);
-      eFavorito = !eFavorito;
-      
-    }
-  });
-}
+            const res = await fetch("http://localhost:3001/pokemon", {
+              body: JSON.stringify(Pokemon),
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+              },
+            });
+            const response = await res.json();
+            botaoAdd.setAttribute("data-fav", response.id);
+            eFavorito = !eFavorito;
+          }
+        });
+      }
 
-PokemonAdd(); 
+      PokemonAdd();
 
       const buttonInfo = document.getElementById(item.name);
       const button = buttonInfo.querySelector(".info");
@@ -133,20 +134,28 @@ PokemonAdd();
                         <h1>${item.name}</h1>
                         <p>
                         <strong><em>Habilidade:</em></strong> ${
-                              dados.abilities[0]
-                                ? dados.abilities[0]?.ability.name
-                                : "Não há"
-                            }
+                          dados.abilities[0]
+                            ? dados.abilities[0]?.ability.name
+                            : "Não há"
+                        }
                         </p>
 
                         <p>
                         <strong><em>Efeito:</em></strong> 
-                        ${habilidadesJson.effect_entries[0]? habilidadesJson.effect_entries[0].effect: "Não há"}
+                        ${
+                          habilidadesJson.effect_entries[0]
+                            ? habilidadesJson.effect_entries[0].effect
+                            : "Não há"
+                        }
                         </p>
 
                         <p>
                         <strong><em>Efeito rápido:</em></strong> 
-                        ${habilidadesJson.effect_entries[0] ? habilidadesJson.effect_entries[0].short_effect: "Não há"}
+                        ${
+                          habilidadesJson.effect_entries[0]
+                            ? habilidadesJson.effect_entries[0].short_effect
+                            : "Não há"
+                        }
                         </p>
 
                         <p>
@@ -357,12 +366,18 @@ async function nextPage() {
     ul.insertAdjacentHTML(
       "beforeend",
       `
-            <li id=${item.name} style="background-color:${cores[dados.types[0].type.name]}">
+            <li id=${item.name} style="background-color:${
+        cores[dados.types[0].type.name]
+      }">
             <div class="botaoFavorito">
-            <button id="${item.name}fav" class="Estrela"><img id="${item.name}img" class="estrelaImg" src="./imagens/Botaofav/botaofav.svg" alt=""></button>
+            <button id="${item.name}fav" class="Estrela"><img id="${
+        item.name
+      }img" class="estrelaImg" src="./imagens/Botaofav/botaofav.svg" alt=""></button>
             </div>
                 <p class="nomePoke">${item.name}</p>
-                <img class="imgPoke" src="${dados.sprites.other.dream_world.front_default}" alt="Imagem pokémon">
+                <img class="imgPoke" src="${
+                  dados.sprites.other.dream_world.front_default
+                }" alt="Imagem pokémon">
                 <button class="info">Mais informações</button> 
             </li>
             
@@ -370,55 +385,49 @@ async function nextPage() {
     );
 
     function PokemonAdd() {
-        const UserId = localStorage.getItem("userId");
-        const botaoAdd = document.getElementById(`${item.name}fav`);
-        const img = document.getElementById(`${item.name}img`);
-        let eFavorito = false;
-        botaoAdd.addEventListener("click", async () => {
-          
-  
-          if (eFavorito) {
-            document.body.insertAdjacentHTML(
-              "beforeend",
-              `
+      const UserId = localStorage.getItem("userId");
+      const botaoAdd = document.getElementById(`${item.name}fav`);
+      const img = document.getElementById(`${item.name}img`);
+      let eFavorito = false;
+      botaoAdd.addEventListener("click", async () => {
+        if (eFavorito) {
+          document.body.insertAdjacentHTML(
+            "beforeend",
+            `
                 <div class="toast erro">
                 <p>Você removeu este item dos favoritos!</p>
                 </div>
                 `
-            );
-            const idFav = botaoAdd.getAttribute("data-fav")
-            console.log(idFav,"fav id")
-            img.src = "./imagens/Botaofav/botaofav.svg";
-            await fetch(
-              `http://localhost:3001/pokemon/${idFav}`,
-              {
-                method: "DELETE",
-                headers: {
-                  "Content-Type": "application/json; charset=utf-8",
-                },
-              }
-            );
-            botaoAdd.removeAttribute("data-fav")
-             eFavorito = !eFavorito;
-          } else {
-            document.body.insertAdjacentHTML(
-              "beforeend",
-              `
+          );
+          const idFav = botaoAdd.getAttribute("data-fav");
+          console.log(idFav, "fav id");
+          img.src = "./imagens/Botaofav/botaofav.svg";
+          await fetch(`http://localhost:3001/pokemon/${idFav}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+          });
+          botaoAdd.removeAttribute("data-fav");
+          eFavorito = !eFavorito;
+        } else {
+          document.body.insertAdjacentHTML(
+            "beforeend",
+            `
               <div class="toast sucesso">
               <p>Você adicionou este item aos favoritos!</p>
               </div>
               `
-            );
-            
-            img.src = "./imagens/Botaofav/botaofav2.svg";
-            
-            
-            const Pokemon = {
-              name: item.name,
-              img: dados.sprites.other.dream_world.front_default,
-              userId: UserId,
-              color: `${cores[dados.types[0].type.name]}`
-            };
+          );
+
+          img.src = "./imagens/Botaofav/botaofav2.svg";
+
+          const Pokemon = {
+            name: item.name,
+            img: dados.sprites.other.dream_world.front_default,
+            userId: UserId,
+            color: `${cores[dados.types[0].type.name]}`,
+          };
           const res = await fetch(`http://localhost:3001/pokemon`, {
             body: JSON.stringify(Pokemon),
             method: "POST",
@@ -426,15 +435,14 @@ async function nextPage() {
               "Content-Type": "application/json; charset=utf-8",
             },
           });
-          const response = await res.json()
-          console.log(response.id,"id")
-          botaoAdd.setAttribute("data-fav",response.id)
+          const response = await res.json();
+          console.log(response.id, "id");
+          botaoAdd.setAttribute("data-fav", response.id);
           eFavorito = !eFavorito;
         }
-       
-        });
-      }
-      PokemonAdd();
+      });
+    }
+    PokemonAdd();
 
     const buttonInfo = document.getElementById(item.name);
     const button = buttonInfo.querySelector(".info");
@@ -685,24 +693,23 @@ async function nextPage() {
       }
     });
   }
-
 }
 
 function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
   const botaoLoginHome = document.querySelector(".botaoLoginHome");
   const botaoCadastroHome = document.querySelector(".botaoCadastroHome");
-  const imgCadastro = document.getElementById("imgCadastrar")
-  const Pokemons = document.querySelector(".pokemons")
-  const logo = document.querySelector(".logo")
-  const botaoCell = document.querySelector(".homeButton")
-  const ListaFav = document.querySelector(".lista")
+  const imgCadastro = document.getElementById("imgCadastrar");
+  const Pokemons = document.querySelector(".pokemons");
+  const logo = document.querySelector(".logo");
+  const botaoCell = document.querySelector(".homeButton");
+  const ListaFav = document.querySelector(".lista");
   console.log(Islogged);
   if (!Islogged) {
-    Pokemons.remove() 
-    botaoCell.remove()
-    logo.remove()
-    ListaFav.remove()
+    Pokemons.remove();
+    botaoCell.remove();
+    logo.remove();
+    ListaFav.remove();
     document.body.insertAdjacentHTML(
       "beforeend",
       `
@@ -729,49 +736,36 @@ VerificarLogado();
 
 let listaAberta = false;
 
-
 function exibirModal(mensagem) {
-
-  const modal = document.createElement('div');
-  modal.classList.add('modal');
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
   modal.innerHTML = `
     <div class="toast erro">
       <p>${mensagem}</p>
-     
     </div>
   `;
   document.body.appendChild(modal);
-
-  
-  modal.querySelector('.fechar-modal').addEventListener('click', () => {
-    modal.remove();
-  });
 }
-
 
 async function PegarFavoritos() {
   const userId = localStorage.getItem("userId");
   const res = await fetch(`http://localhost:3001/pokemon/?userId=${userId}`);
   const favoritos = await res.json();
-
   const imgBotao = document.getElementById("FavoritoImg");
 
-  
   if (listaAberta) {
     const ulExistente = document.querySelector(".ListaPokemonsFavoritados");
     if (ulExistente) ulExistente.remove();
-    imgBotao.src = "./imagens/downloadpoke.png"; 
+    imgBotao.src = "./imagens/downloadpoke.png";
     listaAberta = false;
-    return; 
+    return;
   }
 
-  
   if (favoritos.length === 0) {
     exibirModal("Você ainda não possui Pokémons favoritos!");
     return;
   }
 
-  
   document.body.insertAdjacentHTML(
     "beforeend",
     `
@@ -783,7 +777,7 @@ async function PegarFavoritos() {
     `
   );
   imgBotao.src = "./imagens/tabler--pokeball-off.svg";
-  listaAberta = true; 
+  listaAberta = true;
 
   const ul = document.querySelector(".ListaPokemonsFavoritados");
 
@@ -802,49 +796,34 @@ async function PegarFavoritos() {
     );
   }
 
-
   document.querySelectorAll(".removerFavoritoBtn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.getAttribute("data-id");
       const name = btn.getAttribute("data-name");
 
-      
-        const response = await fetch(`http://localhost:3001/pokemon/${id}`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-        });
+      const response = await fetch(`http://localhost:3001/pokemon/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
 
-        if (response.ok) {
-          btn.closest("li").remove(); 
+      if (response.ok) {
+        btn.closest("li").remove();
 
-          const favBtn = document.getElementById(`${name}img`);
-          if (favBtn) {
-            favBtn.src = "./imagens/Botaofav/botaofav.svg"; 
-          }
-
-          
-          if (document.querySelectorAll(".removerFavoritoBtn").length === 0) {
-            document.querySelector(".ListaPokemonsFavoritados").remove();
-            imgBotao.src = "./imagens/downloadpoke.png"; 
-            listaAberta = false; 
-            exibirModal("Você removeu todos os seus favoritos.");
-          }
+        const favBtn = document.getElementById(`${name}img`);
+        if (favBtn) {
+          favBtn.src = "./imagens/Botaofav/botaofav.svg";
         }
-      
+
+        if (document.querySelectorAll(".removerFavoritoBtn").length === 0) {
+          document.querySelector(".ListaPokemonsFavoritados").remove();
+          imgBotao.src = "./imagens/downloadpoke.png";
+          listaAberta = false;
+          exibirModal("Você removeu todos os seus favoritos.");
+        }
       }
-    )});
-  };
-
-
-
-
-  
-  PegarFavoritos();
-;
-
-
-
-
+    });
+  });
+}
 document.querySelector(".botaoFavoritoLista").addEventListener("click", () => {
   const ul = document.querySelector(".ListaPokemonsFavoritados");
   const imgBotaoFav = document.getElementById("FavoritoImg");
@@ -852,11 +831,9 @@ document.querySelector(".botaoFavoritoLista").addEventListener("click", () => {
   if (ul) {
     ul.remove();
     imgBotaoFav.src = "./imagens/downloadpoke.png";
+    listaAberta = false;
   } else {
-    PegarFavoritos()
+    PegarFavoritos();
     imgBotaoFav.src = "./imagens/tabler--pokeball-off.svg";
   }
 });
-
-
-
