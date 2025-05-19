@@ -232,10 +232,8 @@ carregarTodosPokemons();
 function pesquisarPokemons() {
   const inputPesquisa = document.querySelector("input");
   const ulPrincipal = document.querySelector("ul");
-  let debounce;
   inputPesquisa.addEventListener("input", () => {
-    clearTimeout(debounce);
-    debounce = setTimeout(async () => {
+    setTimeout(async () => {
       const termo = inputPesquisa.value.toLowerCase();
       if (termo === "") {
         ulPrincipal.innerHTML = "";
