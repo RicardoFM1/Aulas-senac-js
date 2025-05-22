@@ -100,7 +100,7 @@ async function abrirModal(item, dados) {
         }</p>
         <p><strong><em>Efeito rápido:</em></strong> ${
           habilidades2?.effect_entries?.[0]?.short_effect ?? "Não há"
-        }</p>
+        }</p> 
         <p><strong><em>Vida base:</em></strong> ${
           dados.stats[0].base_stat ?? "Não há"
         }</p>
