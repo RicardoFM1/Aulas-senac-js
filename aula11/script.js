@@ -241,12 +241,12 @@ async function carregarTodosPokemons() {
 carregarTodosPokemons();
 
 function pesquisarPokemons() {
-  const inputPesquisa = document.querySelector("input");
-  const ulPrincipal = document.querySelector("ul");
-  let debounce;
+  let pesquisaTimeout = null;
+  const ulPrincipal = document.querySelector("ul"); 
+
   inputPesquisa.addEventListener("input", () => {
-    clearTimeout(debounce);
-    debounce = setTimeout(async () => {
+    clearTimeout(pesquisaTimeout);
+    pesquisaTimeout = setTimeout(async () => {
       const termo = inputPesquisa.value.toLowerCase();
       if (termo === "") {
         ulPrincipal.innerHTML = "";
@@ -270,7 +270,7 @@ function pesquisarPokemons() {
         const dados = await res.json();
         await renderPokemonLi(poke, dados, ulPrincipal);
       }
-    }, 200);
+    }, 300);
   });
 }
 pesquisarPokemons();
