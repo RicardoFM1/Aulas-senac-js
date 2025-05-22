@@ -1,3 +1,5 @@
+import { exibirModal } from "../modal/modal.js"
+
 function Login(){
    
     
@@ -22,12 +24,7 @@ function Login(){
         })
         
         if(res.status === 200){
-            document.body.insertAdjacentHTML("beforeend", `
-                <div class="toast sucesso">
-                    <p>Login efetuado com sucesso!</p>
-                    <p>Redirecionando para a página principal</p
-                </div>
-                `)
+           exibirModal("Login realizado com sucesso!", "sucesso")
                 const response = await res.json()
 
                 const Islogged = {

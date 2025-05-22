@@ -101,11 +101,20 @@ async function abrirModal(item, dados) {
         <p><strong><em>Efeito rápido:</em></strong> ${
           habilidades2?.effect_entries?.[0]?.short_effect ?? "Não há"
         }</p>
-        <p><strong><em>Experiência base:</em></strong> ${
-          dados.base_experience ?? "Não há"
+        <p><strong><em>Vida base:</em></strong> ${
+          dados.stats[0].base_stat ?? "Não há"
         }</p>
-        <p><strong><em>índice do jogo:</em></strong> ${
-          dados.game_indices?.[0]?.game_index ?? "Não há"
+        <p><strong><em>Ataque:</em></strong> ${
+          dados.stats[1].base_stat ?? "Não há"
+        }</p>
+        <p><strong><em>Defesa:</em></strong> ${
+          dados.stats[2].base_stat ?? "Não há"
+        }</p>
+        <p><strong><em>Velocidade:</em></strong> ${
+          dados.stats[5].base_stat ?? "Não há"
+        }</p>
+        <p><strong><em>Peso:</em></strong> ${
+          dados.weight ?? "Não há"
         }</p>
         <p>
           <strong><em>Onde encontrar:</em></strong> ${
@@ -189,6 +198,7 @@ async function renderPokemonLi(item, dados, ul) {
 
 // --- LISTAGEM PRINCIPAL ---
 async function pegarPokemons() {
+  setTimeout(async() => {
   const pokemons = await fetch(
     `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`
   );
@@ -201,12 +211,13 @@ async function pegarPokemons() {
     const dados = await data.json();
     await renderPokemonLi(item, dados, ul);
   }
-}
+}, 150);}
 
 // --- PAGINAÇÃO ---
 const prevBtn = document.querySelector("#prev");
 const btnNext = document.querySelector("#next");
 const inputPesquisa = document.querySelector("input");
+setTimeout(() => {
 btnNext.onclick = () => {
   inputPesquisa.value = "";
   offset += 20;
@@ -220,7 +231,7 @@ prevBtn.onclick = () => {
   pegarPokemons();
 };
 prevBtn.setAttribute("disabled", true);
-
+},150)
 // --- PESQUISA ---
 async function carregarTodosPokemons() {
   const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1302");
@@ -264,109 +275,6 @@ function pesquisarPokemons() {
 }
 pesquisarPokemons();
 
-// --- FAVORITOS NA LISTA  ---
-function exibirModal(mensagem) {
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
-  modal.innerHTML = `
-    <div class="toast erro">
-      <p>${mensagem}</p>
-    </div>
-  `;
-  document.body.appendChild(modal);
-}
-
-async function PegarFavoritos() {
-  const userId = localStorage.getItem("userId");
-  const res = await fetch(`http://localhost:3001/pokemon/?userId=${userId}`);
-  const favoritos = await res.json();
-  const imgBotao = document.getElementById("FavoritoImg");
-
-  if (listaAberta) {
-    const ulExistente = document.querySelector(".ListaPokemonsFavoritados");
-    if (ulExistente) ulExistente.remove();
-    imgBotao.src = "./imagens/downloadpoke.png";
-    listaAberta = false;
-    return;
-  }
-
-  if (favoritos.length === 0) {
-    exibirModal("Você ainda não possui Pokémons favoritos!");
-    return;
-  }
-
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `
-    <ul class="ListaPokemonsFavoritados">
-      <div class="TituloFavorito">
-        <h1>Pokémons Favoritos:</h1>
-      </div>
-    </ul>
-    `
-  );
-  imgBotao.src = "./imagens/tabler--pokeball-off.svg";
-  listaAberta = true;
-
-  const ul = document.querySelector(".ListaPokemonsFavoritados");
-
-  for (const pokeFavorito of favoritos) {
-    ul.insertAdjacentHTML(
-      "beforeend",
-      `
-      <li class="PokemonsFavoritados" style="background-color: ${pokeFavorito.color}">
-        <p class="nomePoke">${pokeFavorito.name}</p>
-        <img class="imgPoke" src="${pokeFavorito.img}">
-        <button class="removerFavoritoBtn imgRemove" style="background-color: ${pokeFavorito.color}" data-id="${pokeFavorito.id}" data-name="${pokeFavorito.name}">
-          <img src="./imagens/mdi--remove.svg" alt="Remover">
-        </button>
-      </li>
-      `
-    );
-  }
-
-  document.querySelectorAll(".removerFavoritoBtn").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const id = btn.getAttribute("data-id");
-      const name = btn.getAttribute("data-name");
-
-      const response = await fetch(`http://localhost:3001/pokemon/${id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.ok) {
-        btn.closest("li").remove();
-
-        const favBtn = document.getElementById(`${name}img`);
-        if (favBtn) {
-          favBtn.src = "./imagens/Botaofav/botaofav.svg";
-        }
-
-        if (document.querySelectorAll(".removerFavoritoBtn").length === 0) {
-          document.querySelector(".ListaPokemonsFavoritados").remove();
-          imgBotao.src = "./imagens/downloadpoke.png";
-          listaAberta = false;
-          exibirModal("Você removeu todos os seus favoritos.");
-        }
-      }
-    });
-  });
-}
-document.querySelector(".botaoFavoritoLista").addEventListener("click", () => {
-  const ul = document.querySelector(".ListaPokemonsFavoritados");
-  const imgBotaoFav = document.getElementById("FavoritoImg");
-
-  if (ul) {
-    ul.remove();
-    imgBotaoFav.src = "./imagens/downloadpoke.png";
-    listaAberta = false;
-  } else {
-    PegarFavoritos();
-    imgBotaoFav.src = "./imagens/tabler--pokeball-off.svg";
-  }
-});
-
 // --- VERIFICAÇÃO DE LOGIN ---
 function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
@@ -376,7 +284,9 @@ function VerificarLogado() {
   const Pokemons = document.querySelector(".pokemons");
   const logo = document.querySelector(".logo");
   const ListaFav = document.querySelector(".lista");
+  const Perfil = document.querySelector(".botaoPerfil")
   if (!Islogged) {
+    Perfil?.remove();
     Pokemons?.remove();
     logo?.remove();
     ListaFav?.remove();
@@ -393,6 +303,8 @@ function VerificarLogado() {
     botaoLoginHome?.remove();
     botaoCadastroHome?.removeAttribute("href");
     imgCadastro.src = "./imagens/grommet-icons--logout.svg";
+    botaoCadastroHome?.setAttribute("id", "sair");
+    imgCadastro?.setAttribute("id", "sair");
     botaoCadastroHome?.addEventListener("click", () => {
       localStorage.removeItem("Islogged");
       localStorage.removeItem("userId");
@@ -404,3 +316,8 @@ VerificarLogado();
 
 // --- INICIALIZAÇÃO ---
 pegarPokemons();
+
+// terminar a parte de cadastrar nome,
+// apenas no cadastro irá ter, mandar pra api e depois pegar da api pelo id do usuario
+// arrumar a parte do email do usuario logado ficar maior
+// e fazer o sistema de mudar a foto do usuario

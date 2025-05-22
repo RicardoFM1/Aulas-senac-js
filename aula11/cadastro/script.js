@@ -1,3 +1,5 @@
+import { exibirModal } from "../modal/modal.js";    
+
 const form = document.querySelector("#cadastro")
 function fazerCadastro(){
     form.addEventListener("submit", async(eventocadastro)=>{
@@ -9,24 +11,11 @@ function fazerCadastro(){
         const tamanhoSenha = `${senha.value}`
        
         if(senha.value != confirmarSenha.value){
-            document.body.insertAdjacentHTML("beforeend",`
-                <div class="toast erro">
-                    <p>Confira se a senhas estão idênticas</p>
-                </div>
-                `)
+            exibirModal("Confira se a senhas estão idênticas")
         }else if(senha.value ===  "" || email.value === ""){
-            document.body.insertAdjacentHTML("beforeend",`
-                <div class="toast erro">
-                    <p>Insira uma senha ou email válido</p>
-                </div>
-                `)
+            exibirModal("Insira uma senha ou email válido")
         }else if(tamanhoSenha.length < 8){
-            document.body.insertAdjacentHTML("beforeend", `
-                <div class="toast erro">
-                     <p>A senha precisa ter no mínimo 8 caracteres!</p>
-                </div>
-               `)
-        
+            exibirModal("A senha precisa ter no mínimo 8 caracteres!")
         }else{
             const user  = {
                 password: senha.value, // jorginho@gmail

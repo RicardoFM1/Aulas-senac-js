@@ -303,8 +303,13 @@ a {
   align-items: center;
   margin: 15px 5px 0 0;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 #imgCadastrar {
+  height: 48px;
+  width: 48px;
+}
+#sair {
   height: 48px;
   width: 48px;
 }
@@ -314,6 +319,10 @@ a {
   align-items: center;
   margin-top: 1px 5px 0 0;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.botaoFavoritoHome{
+  color: white;
 }
 #imgLogin {
   height: 48px;
@@ -321,9 +330,11 @@ a {
 }
 .botaoLoginHome:hover {
   background-color: rgba(149, 226, 175, 0.411);
+  transform: scale(1.1);
 }
 .botaoCadastroHome:hover {
   background-color: rgba(15, 232, 141, 0.304);
+  transform: scale(1.1);
 }
 .LogineCadastro input {
   padding: 14px 18px;
@@ -452,7 +463,7 @@ li {
   right: 10px;
   bottom: 50%;
 }
-.botaoFavoritoLista {
+#botaoFavoritoLista {
   color: white;
   background-color: #1000ee;
   border: none;
@@ -467,12 +478,20 @@ li {
   height: 48px;
   width: 48px;
 }
-
-.ListaPokemonsFavoritados {
+.modalFavoritos{
   position: fixed;
-  top: 5%;
-  right: 33%;
-  max-width: 50%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.ListaPokemonsFavoritados {
+  max-width: 100%;
   z-index: 3;
   border: 3px solid black;
   background-color: white;
@@ -591,4 +610,119 @@ li {
   font-size: 32px;
   text-align: center;
   padding: 0 0 414px 0;
+}
+.containerPerfil {
+  max-width: 1000px;
+  margin: 150px auto;
+  background: #fff;
+  padding: 40px 20px 60px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  background-color: #7c6b6b;
+}
+
+.topoPerfil {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.topoPerfil h1 {
+  font-size: 2.5em;
+  margin-top: 1px;
+  font-family: 'Arial', sans-serif;
+}
+
+.topoPerfil p {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #222;
+}
+
+.conteudoPerfil {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+}
+
+.Sobre, .detalhesPerfil{
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #8b6a6a;
+    overflow-y: auto;
+    max-height: 400px;
+    max-width: 500px;
+    border-radius: 5%
+}
+
+.Sobre h2, .detalhesPerfil h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-family: 'Arial', sans-serif;
+}
+
+.Sobre p {
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 16px;
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.profile-image img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eee;
+  background: #f5f5f5;
+}
+
+.detalhesPerfil {
+    font-size: 16px;
+    background-color: #8b6a6a;
+    border-radius: 10%;
+    padding: 20px
+}
+
+.detalhesPerfil p {
+  margin-bottom: 10px;
+}
+
+.detalhesPerfil strong {
+  display: inline-block;
+  min-width: 90px;
+  font-weight: bold;
+  font-size: 18px
+}
+.voltarDoPerfilDiv{
+  position: absolute;
+  top: 23%;
+  transition: all 0.3s ease;
+}
+.voltarDoPerfilDiv:hover{
+  transform: scale(1.1);
+}
+.imgPerfil{
+  width: 48px;
+  height: 48px;
+
+}
+.botaoPerfil{
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 48px;
+  width: 48px;
+}
+.botaoPerfil:hover{
+  transform: scale(1.1);
+  background-color: rgba(149, 226, 175, 0.411);
 }
