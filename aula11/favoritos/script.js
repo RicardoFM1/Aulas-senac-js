@@ -4,7 +4,6 @@ let listaAberta = false;
 
 const botaoFavoritoLista = document.getElementById("botaoFavoritoLista");
 botaoFavoritoLista.addEventListener("click", async () => {
-  // Toggle: se já está aberta, fecha e remove a modal
   if (listaAberta && modalFavoritos) {
     document.body.removeChild(modalFavoritos);
     modalFavoritos = null;
@@ -23,12 +22,11 @@ botaoFavoritoLista.addEventListener("click", async () => {
   modalFavoritos = document.createElement("div");
   modalFavoritos.classList.add("modalFavoritos");
 
-
   let listaFavoritosHTML = `
-    <div style="background:#fff; padding:24px; border-radius:8px; width:1000px; max-height:80vh; overflow-y:auto; box-shadow:0 2px 16px #0003;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
+    <div class="modalFavoritosFundo">
+      <div style="display:flex;justify-content:space-between;align-items:center; ">
         <h1 style="margin:0;font-size:1.2em;">Pokémons Favoritos:</h1>
-        <button id="fecharModalFavoritos" style="font-size:1.2em; background:none; border:none; cursor:pointer;">✖</button>
+        <button id="fecharModalFavoritos" style="font-size:18px; background:none; border:none; cursor:pointer;">✖</button>
       </div>
       <ul class="ListaPokemonsFavoritados" style="max-height:300px;overflow-y:auto;list-style:none;padding:0;">
   `;
@@ -50,14 +48,12 @@ botaoFavoritoLista.addEventListener("click", async () => {
   document.body.appendChild(modalFavoritos);
   listaAberta = true;
 
-  // Fechar modal ao clicar no botão X
   document.getElementById("fecharModalFavoritos").onclick = () => {
     document.body.removeChild(modalFavoritos);
     modalFavoritos = null;
     listaAberta = false;
   };
 
-  // Remover favorito
   modalFavoritos.querySelectorAll(".removerFavoritoBtn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.getAttribute("data-id");
@@ -76,11 +72,16 @@ botaoFavoritoLista.addEventListener("click", async () => {
           favBtn.src = "./imagens/Botaofav/botaofav.svg";
         }
 
-        if (modalFavoritos.querySelectorAll(".removerFavoritoBtn").length === 0) {
+        if (
+          modalFavoritos.querySelectorAll(".removerFavoritoBtn").length === 0
+        ) {
           document.body.removeChild(modalFavoritos);
           modalFavoritos = null;
           listaAberta = false;
-          exibirModal("Você removeu todos os seus favoritos.");
+          exibirModal(
+            "Você removeu todos os seus pokémons favoritos.",
+            "sucesso"
+          );
         }
       }
     });
@@ -97,9 +98,104 @@ async function detalhesPerfil() {
   const user = await res.json();
 
   const email = document.querySelector(".emailPerfil");
+  const nome = document.querySelector(".nomePerfil");
   if (email) {
     email.innerHTML = `<strong>Email:</strong> ${user.email}`;
   }
+  if (nome) {
+    nome.innerHTML = `<strong>Nome:</strong> ${user.nome}`;
+  }
+}
+detalhesPerfil();
+
+function deletarConta() {
+  const botaoDeletar = document.getElementById("deletarConta");
+
+  botaoDeletar.addEventListener("click", (e) => {
+    const modalConfirmacao = document.getElementById("confirmacaoModal");
+    if (modalConfirmacao) {
+      modalConfirmacao.remove();
+      return;
+    } else {
+      e.preventDefault();
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        `
+    <div class="modalDeletarFundo">
+    <div id="confirmacaoModal">
+    <h1 class="tituloConfirmacao">TEM CERTEZA?</h1>
+    <p>Tem realmente certeza que quer <span>DELETAR</span> sua <span>CONTA?</span></p>
+    <div class="botoesDeletar">
+    <button id="buttonConfirmarSim">Sim</button>
+    <button id="buttonConfirmarNao">Não</button>
+    </div>
+    </div>
+    </div>
+    
+      `
+      );
+      const botaoTirarModal = document.getElementById("buttonConfirmarNao");
+      botaoTirarModal.addEventListener("click", (e) => {
+        const modalConfirmacao = document.getElementById("confirmacaoModal");
+        const modalDeletarFundo = document.querySelector(".modalDeletarFundo");
+        e.preventDefault();
+        if (modalConfirmacao) {
+          modalDeletarFundo.remove();
+          modalConfirmacao.remove();
+        }
+      });
+      const botaoDeletarUser = document.getElementById("buttonConfirmarSim");
+
+      botaoDeletarUser.addEventListener("click", async () => {
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+        const res = await fetch(`http://localhost:3001/users/${userId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const modalDeletarFundo =
+            document.querySelector(".modalDeletarFundo");
+          const modalConfirmacao = document.getElementById("confirmacaoModal");
+          modalConfirmacao.remove();
+          modalDeletarFundo.remove();
+          exibirModal("Conta deletada com sucesso!", "sucesso");
+          localStorage.removeItem("token");
+          localStorage.removeItem("Islogged");
+          localStorage.removeItem("userId");
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 2000);
+        } else {
+          exibirModal("Erro ao deletar conta!", "erro");
+        }
+      });
+    }
+  });
+}
+deletarConta();
+const inputFoto = document.getElementById("inputFotoPerfil");
+const imgPerfil = document.getElementById("fotoPerfil");
+const userId = localStorage.getItem("userId");
+const fotoSalva = localStorage.getItem(`fotoPerfil_${userId}`);
+if (fotoSalva) {
+  imgPerfil.src = fotoSalva;
+} else {
+  imgPerfil.src = "../imagens/ph--user-fill.svg";
 }
 
-detalhesPerfil();
+inputFoto?.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (evt) {
+    imgPerfil.src = evt.target.result;
+    localStorage.setItem(`fotoPerfil_${userId}`, evt.target.result);
+  };
+  reader.readAsDataURL(file);
+});

@@ -320,7 +320,7 @@ a {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.botaoFavoritoHome{
+.botaoFavoritoHome {
   color: white;
 }
 #imgLogin {
@@ -464,30 +464,35 @@ li {
 }
 #botaoFavoritoLista {
   color: white;
-  background-color: #1000ee;
+  background-color: #1976d2;
   border: none;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 24px;
   padding: 0 10px 1px 10px;
   margin: 8px;
   cursor: pointer;
-  border-radius: 150px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+#botaoFavoritoLista:hover {
+  background-color: #125ea7;
 }
 #FavoritoImg {
   height: 48px;
   width: 48px;
 }
-.modalFavoritos{
+.modalFavoritos {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(15px);
 }
 .ListaPokemonsFavoritados {
   max-width: 100%;
@@ -517,39 +522,6 @@ li {
   height: 100px;
   width: 100px;
 }
-.TituloFavorito h1 {
-  color: #ffcb05;
-  text-shadow: 2px 2px 8px #2a75bb, 0 0 10px #fff;
-  font-size: 36px;
-  font-family: "Pokemon Solid", Arial, sans-serif;
-  text-align: center;
-  margin: 20px 0 10px 0;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg, #2a75bb 0%, #ffcb05 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 10px 0;
-  border-radius: 10px;
-  position: relative;
-}
-
-.TituloFavorito h1::before {
-  content: url("./imagens/pokeball.svg");
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 32px;
-  height: 32px;
-}
-
-.TituloFavorito h1::after {
-  content: url("./imagens/pikachu.svg");
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  width: 32px;
-  height: 32px;
-}
 .ListaPokemonsFavoritados::-webkit-scrollbar {
   width: 10px;
   background-color: #bebebe;
@@ -558,21 +530,12 @@ li {
   background: #ed1a23;
   border-radius: 10px;
 }
-.botaoFavoritoLista:hover {
-  background-color: rgba(15, 232, 141, 0.304);
-}
 .removerFavorito {
   position: absolute;
   right: 12px;
   top: 12px;
 }
-.fecharFavoritos {
-  position: fixed;
-  z-index: 9999;
-  right: 6px;
-  top: 1px;
-  border: none;
-}
+
 .fecharFavoritosDiv {
   background-color: rgb(29, 211, 99);
 }
@@ -612,11 +575,11 @@ li {
 }
 .containerPerfil {
   max-width: 1000px;
-  margin: 150px auto;
+  margin: 175px auto;
   background: #fff;
-  padding: 40px 20px 60px 20px;
+  padding: 40px 20px 100px 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
   background-color: #7c6b6b;
 }
 
@@ -626,9 +589,16 @@ li {
 }
 
 .topoPerfil h1 {
-  font-size: 2.5em;
+  position: absolute;
+  top: 14%;
+  left: 17.025%;
+  width: 1000px;
+  font-size: 36px;
   margin-top: 1px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
+  background-color: #997e7e;
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .topoPerfil p {
@@ -644,22 +614,20 @@ li {
   gap: 40px;
 }
 
-.Sobre, .detalhesPerfil{
-    font-size: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #8b6a6a;
-    overflow-y: auto;
-    max-height: 400px;
-    max-width: 500px;
-    border-radius: 5%
+.Sobre,
+.detalhesPerfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  border-radius: 5%;
 }
 
-.Sobre h2, .detalhesPerfil h2 {
+.Sobre h2,
+.detalhesPerfil h2 {
   font-size: 24px;
   margin-bottom: 16px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .Sobre p {
@@ -685,10 +653,10 @@ li {
 }
 
 .detalhesPerfil {
-    font-size: 16px;
-    background-color: #8b6a6a;
-    border-radius: 10%;
-    padding: 20px
+  font-size: 16px;
+  background-color: #8b6a6a;
+  border-radius: 10%;
+  padding: 20px;
 }
 
 .detalhesPerfil p {
@@ -696,32 +664,149 @@ li {
 }
 
 .detalhesPerfil strong {
-  display: inline-block;
-  min-width: 90px;
+  display: block;
+  min-width: 278px;
   font-weight: bold;
-  font-size: 18px
+  font-size: 18px;
 }
-.voltarDoPerfilDiv{
+.voltarDoPerfilDiv {
   position: absolute;
-  top: 23%;
+  top: 25%;
   transition: all 0.3s ease;
 }
-.voltarDoPerfilDiv:hover{
+.voltarDoPerfilDiv:hover {
   transform: scale(1.1);
 }
-.imgPerfil{
+.imgPerfil {
   width: 48px;
   height: 48px;
-
 }
-.botaoPerfil{
+.botaoPerfil {
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   height: 48px;
   width: 48px;
 }
-.botaoPerfil:hover{
+.botaoPerfil:hover {
   transform: scale(1.1);
   background-color: rgba(149, 226, 175, 0.411);
+}
+.DeletConta {
+  position: absolute;
+  top: 26%;
+  right: 18%;
+  transition: all 0.3s ease;
+}
+#deletarConta {
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-family: "Courier New", Courier, monospace;
+}
+#confirmacaoModal {
+  position: absolute;
+  top: 39%;
+  left: 31%;
+  background-color: red;
+  color: white;
+  padding: 40px;
+  border-radius: 10px;
+}
+.botoesDeletar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 24px;
+  gap: 20px;
+}
+#buttonConfirmarSim {
+  background-color: green;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+#buttonConfirmarSim:hover {
+  background-color: #4caf50;
+  cursor: pointer;
+}
+#buttonConfirmarNao {
+  background-color: rgb(128, 0, 0);
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+#buttonConfirmarNao:hover {
+  background-color: #f44336;
+  cursor: pointer;
+}
+.modalDeletarFundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  backdrop-filter: blur(15px);
+}
+.modalFavoritosFundo {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  width: 600px;
+  max-height: 100vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 16px #0003;
+}
+span {
+  font-size: 24px;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+}
+.contador {
+  background-color: none;
+  color: white;
+  position: absolute;
+  top: 1%;
+  right: 9%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+}
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.mudarFotoBtn{
+  margin-top: 12px;
+  background: #1976d2;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+
+.mudarFotoBtn:hover {
+  background: #125ea7;
 }

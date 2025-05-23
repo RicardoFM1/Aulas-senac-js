@@ -18,20 +18,27 @@ function toast(msg, tipo = "sucesso") {
 }
 
 // --- FAVORITOS ---
-async function getFavoritos() {
+async function pegarFavoritos() {
   const userId = getUserId();
   if (!userId) return [];
   const res = await fetch(`http://localhost:3001/pokemon/?userId=${userId}`);
   return await res.json();
 }
-async function toggleFavorito(item, dados, botaoAdd, img) {
+
+async function pokemonAdd(item, dados, botaoAdd, img) {
+  const contagem = document.querySelector(".contador")
   if (!estaLogado()) {
     toast("Você precisa estar logado para favoritar!", "erro");
     return;
   }
-  let favoritos = await getFavoritos();
+  let favoritos = await pegarFavoritos();
   let fav = favoritos.find((f) => f.name === item.name);
+  contagem.innerHTML = `${favoritos.length}!`;
   if (fav) {
+    contagem.innerHTML = `${favoritos.length - 1}`;
+    if (favoritos.length <= 1) {
+      contagem.innerHTML = "";
+    }
     toast("Você removeu este item dos favoritos!", "erro");
     img.src = "./imagens/Botaofav/botaofav.svg";
     await fetch(`http://localhost:3001/pokemon/${fav.id}`, {
@@ -39,6 +46,10 @@ async function toggleFavorito(item, dados, botaoAdd, img) {
     });
     botaoAdd.removeAttribute("data-fav");
   } else {
+    const contagem = document.querySelector(".contador")
+    if(favoritos.length >= 0){
+      contagem.innerHTML = `${favoritos.length + 1}`
+    }
     toast("Você adicionou este item aos favoritos!");
     img.src = "./imagens/Botaofav/botaofav2.svg";
     const Pokemon = {
@@ -102,19 +113,19 @@ async function abrirModal(item, dados) {
           habilidades2?.effect_entries?.[0]?.short_effect ?? "Não há"
         }</p> 
         <p><strong><em>Vida base:</em></strong> ${
-          dados.stats[0].base_stat ?? "Não há"
+         dados.stats[0] ? `${dados.stats[0].base_stat} PV` : "Não há"
         }</p>
         <p><strong><em>Ataque:</em></strong> ${
-          dados.stats[1].base_stat ?? "Não há"
+         dados.stats[1] ? `${dados.stats[1].base_stat} Pontos` : "Não há"
         }</p>
         <p><strong><em>Defesa:</em></strong> ${
-          dados.stats[2].base_stat ?? "Não há"
+          dados.stats[2] ? `${dados.stats[2].base_stat} PD` : "Não há"
         }</p>
         <p><strong><em>Velocidade:</em></strong> ${
-          dados.stats[5].base_stat ?? "Não há"
+          dados.stats[5] ? `${dados.stats[5].base_stat} km/h` : "Não há"
         }</p>
         <p><strong><em>Peso:</em></strong> ${
-          dados.weight ?? "Não há"
+          dados.weight ? `${dados.weight} kg` : "Não há"
         }</p>
         <p>
           <strong><em>Onde encontrar:</em></strong> ${
@@ -166,7 +177,7 @@ async function abrirModal(item, dados) {
 
 // --- RENDERIZAÇÃO ---
 async function renderPokemonLi(item, dados, ul) {
-  let favoritos = await getFavoritos();
+  let favoritos = await pegarFavoritos();
   let fav = favoritos.find((f) => f.name === item.name);
   ul.insertAdjacentHTML(
     "beforeend",
@@ -191,7 +202,7 @@ async function renderPokemonLi(item, dados, ul) {
   );
   const botaoAdd = document.getElementById(`${item.name}fav`);
   const img = document.getElementById(`${item.name}img`);
-  botaoAdd.onclick = () => toggleFavorito(item, dados, botaoAdd, img);
+  botaoAdd.onclick = () => pokemonAdd(item, dados, botaoAdd, img);
   const buttonInfo = document.getElementById(item.name).querySelector(".info");
   buttonInfo.onclick = () => abrirModal(item, dados);
 }
@@ -317,7 +328,4 @@ VerificarLogado();
 // --- INICIALIZAÇÃO ---
 pegarPokemons();
 
-// terminar a parte de cadastrar nome,
-// apenas no cadastro irá ter, mandar pra api e depois pegar da api pelo id do usuario
-// arrumar a parte do email do usuario logado ficar maior
-// e fazer o sistema de mudar a foto do usuario
+

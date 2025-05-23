@@ -10,34 +10,41 @@
     <div class="containerPerfil">
       <div class="topoPerfil">
         <div class="voltarDoPerfilDiv">
-            <a class="voltarDoPerfil" href="/"><img src="../imagens/icon-park-twotone--back.svg" alt="voltar"></a>
-
+          <a class="voltarDoPerfil" href="/"
+            ><img src="../imagens/icon-park-twotone--back.svg" alt="voltar"
+          /></a>
+        </div>
+        <div class="DeletConta">
+          <button id="deletarConta">Deletar Conta</button>
         </div>
         <h1>Perfil</h1>
       </div>
       <div class="conteudoPerfil">
         <div class="Sobre">
-          <h2>Sobre mim</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci
-            sem, facilisis vitae tincidunt id, varius at nulla. Phasellus
-            blandit laoreet nulla at pretium. Mauris eleifend ante non tellus
-            tempor, at sagittis libero vestibulum. Orci varius natoque penatibus
-            et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
+          <h2>Aqui estão suas informações:</h2>
+          <p></p>
         </div>
         <div class="profile-image">
-          <img src="../imagens/Botaofav/" alt="Foto de perfil" />
+          <img
+            id="fotoPerfil"
+            src="../imagens/ph--user-fill.svg"
+            alt="Foto de perfil"
+          />
+          <label for="inputFotoPerfil" class="mudarFotoBtn">Mudar foto</label>
+          <input
+            type="file"
+            id="inputFotoPerfil"
+            accept="image/*"
+            style="display: none"
+          />
         </div>
         <div class="detalhesPerfil">
           <h2>Detalhes</h2>
-          <p><strong>Nome:</strong>Ricardinho</p>
-          <p class="emailPerfil"><strong>Email:</strong></p>
-          <button id="botaoFavoritoLista">Favoritos</button>
+          <div class="nomePerfil"></div>
+          <div class="emailPerfil"></div>
+          <button id="botaoFavoritoLista">Pokémons favoritos</button>
         </div>
       </div>
-     
-      
     </div>
 
     <script type="module" src="./script.js"></script>
