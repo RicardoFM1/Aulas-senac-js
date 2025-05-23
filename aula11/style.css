@@ -594,12 +594,12 @@ li {
 .topoPerfil h1 {
     position: absolute;
     top: 14%;
-    left: 16.5%;
+    left: 17%;
     width: 1005px;
     font-size: 36px;
     margin-top: 1px;
     font-family: "Arial", sans-serif;
-    background-color:  #34495e;
+    background-color: #34495e;
     padding: 10px;
     border-radius: 12px;
 }

@@ -1,9 +1,9 @@
 import { cores } from "./cores.js";
 let offset = 0;
 let todosPokemons = [];
-let listaAberta = false;
 
-// --- UTILITÁRIOS ---
+
+
 function estaLogado() {
   return !!localStorage.getItem("Islogged");
 }
@@ -17,7 +17,7 @@ function toast(msg, tipo = "sucesso") {
   );
 }
 
-// --- FAVORITOS ---
+
 async function pegarFavoritos() {
   const userId = getUserId();
   if (!userId) return [];
@@ -68,7 +68,7 @@ async function pokemonAdd(item, dados, botaoAdd, img) {
   }
 }
 
-// --- MODAL ---
+
 async function abrirModal(item, dados) {
   const habilidades = await fetch(dados.abilities[0]?.ability?.url ?? "")
     .then((r) => r.json())
@@ -175,7 +175,7 @@ async function abrirModal(item, dados) {
   };
 }
 
-// --- RENDERIZAÇÃO ---
+
 async function renderPokemonLi(item, dados, ul) {
   let favoritos = await pegarFavoritos();
   let fav = favoritos.find((f) => f.name === item.name);
@@ -207,7 +207,7 @@ async function renderPokemonLi(item, dados, ul) {
   buttonInfo.onclick = () => abrirModal(item, dados);
 }
 
-// --- LISTAGEM PRINCIPAL ---
+
 async function pegarPokemons() {
   setTimeout(async() => {
   const pokemons = await fetch(
@@ -224,7 +224,7 @@ async function pegarPokemons() {
   }
 }, 150);}
 
-// --- PAGINAÇÃO ---
+
 const prevBtn = document.querySelector("#prev");
 const btnNext = document.querySelector("#next");
 const inputPesquisa = document.querySelector("input");
@@ -243,7 +243,7 @@ prevBtn.onclick = () => {
 };
 prevBtn.setAttribute("disabled", true);
 },150)
-// --- PESQUISA ---
+
 async function carregarTodosPokemons() {
   const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1302");
   const data = await res.json();
@@ -286,7 +286,7 @@ function pesquisarPokemons() {
 }
 pesquisarPokemons();
 
-// --- VERIFICAÇÃO DE LOGIN ---
+
 function VerificarLogado() {
   const Islogged = JSON.parse(localStorage.getItem("Islogged"));
   const botaoLoginHome = document.querySelector(".botaoLoginHome");
@@ -325,7 +325,7 @@ function VerificarLogado() {
 }
 VerificarLogado();
 
-// --- INICIALIZAÇÃO ---
+
 pegarPokemons();
 
 
