@@ -9,6 +9,10 @@ function fazerCadastro() {
       const email = document.querySelector("#email");
       const confirmarSenha = document.querySelector("#confirmaSenha");
       const tamanhoSenha = `${senha.value}`;
+      const datacadastro = new Date();
+      const dia = datacadastro.getDate();
+      const mes = datacadastro.getMonth() + 1;
+      const ano = datacadastro.getFullYear();
       const nome = document.querySelector("#nome");
 
       if (senha.value != confirmarSenha.value) {
@@ -24,6 +28,7 @@ function fazerCadastro() {
           password: senha.value, // jorginho@gmail
           email: email.value, //jorginhobao
           nome: nome.value, // jorginho
+          dataCadastro: `${dia}/${mes}/${ano}`,
         };
         const res = await fetch("http://localhost:3001/users", {
           method: "POST",

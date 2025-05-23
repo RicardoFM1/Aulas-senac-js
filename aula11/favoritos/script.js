@@ -99,11 +99,15 @@ async function detalhesPerfil() {
 
   const email = document.querySelector(".emailPerfil");
   const nome = document.querySelector(".nomePerfil");
+  const dataCadastro = document.querySelector(".dataPerfil");
   if (email) {
     email.innerHTML = `<strong>Email:</strong> ${user.email}`;
   }
   if (nome) {
     nome.innerHTML = `<strong>Nome:</strong> ${user.nome}`;
+  }
+  if (dataCadastro) {
+    dataCadastro.innerHTML = `<strong>Data de Cadastro:</strong> ${user.dataCadastro}`;
   }
 }
 detalhesPerfil();
