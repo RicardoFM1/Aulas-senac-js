@@ -107,7 +107,7 @@ async function detalhesPerfil() {
     nome.innerHTML = `<strong>Nome:</strong> ${user.nome}`;
   }
   if (dataCadastro) {
-    dataCadastro.innerHTML = `<strong>Data de Cadastro:</strong> ${user.dataCadastro}`;
+    dataCadastro.innerHTML = `<strong>Cadastro:</strong> ${user.dataCadastro}`;
   }
 }
 detalhesPerfil();
