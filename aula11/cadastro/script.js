@@ -13,6 +13,10 @@ function fazerCadastro() {
       const dia = datacadastro.getDate();
       const mes = datacadastro.getMonth() + 1;
       const ano = datacadastro.getFullYear();
+      const hora = datacadastro.getHours();
+      const minutos = datacadastro.getMinutes();
+      const segundos = datacadastro.getSeconds();
+
       const nome = document.querySelector("#nome");
 
       if (senha.value != confirmarSenha.value) {
@@ -28,7 +32,7 @@ function fazerCadastro() {
           password: senha.value, // jorginho@gmail
           email: email.value, //jorginhobao
           nome: nome.value, // jorginho
-          dataCadastro: `${dia}/${mes}/${ano}`,
+          dataCadastro: `${dia}/${mes}/${ano} ${hora}:${minutos}:${segundos}`,
         };
         const res = await fetch("http://localhost:3001/users", {
           method: "POST",
